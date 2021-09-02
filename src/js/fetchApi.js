@@ -6,4 +6,4 @@ async function fetchMovie() {
   const films = await response.json();
   return films;
 }
-export default { fetchMovie };
+export default fetchMovie;
