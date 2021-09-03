@@ -1,6 +1,18 @@
 <section class="card-section">
   <div class="container" id="js-container">
     <ul class="gallery list"></ul>
-    <button class="btn">Show me</button>
-  </div>
+
+    <!-- <button class="btn">Show me</button> -->
+
+    <button type="button" class="btn" data-action="load-more">
+      <span class="spinner is-hidden">
+        <div class="loader">
+          <div class="inner one"></div>
+          <div class="inner two"></div>
+          <div class="inner three"></div>
+        </div>
+      </span>
+
+      <span class="label">Load more</span>
+    </button>
 </section>
