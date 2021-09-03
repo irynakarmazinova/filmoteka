@@ -1,13 +1,19 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
-import getRefs from './refs';
-const refs = getRefs();
+import { searchForm, gallery, loadBtn, container} from './refs';
+
 const api = new API();
 
-refs.searchForm.addEventListener('submit',  onSearch )
+searchForm.addEventListener('submit', onSearch)
+
+
+
 function renderMovieCard(movie) {
-   refs.gallery.insertAdjacentHTML('beforeend', movieTmpl(movie))
+   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie))
 }
+
+
+
 function onSearch(e) {
   e.preventDefault();
  clearMovieCard();
@@ -17,10 +23,11 @@ function onSearch(e) {
         .then(renderMovieCard)
         .catch(error => console.log(error))
   e.currentTarget.elements.query.value = '';
-    
-  
 }
+
+
+
 function clearMovieCard() {
-    refs.gallery.innerHTML = '';
+    gallery.innerHTML = '';
 
 }
