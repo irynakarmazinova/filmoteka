@@ -33,12 +33,14 @@
   }
 }
 .gallery__image {
+  display: block;
   border-radius: 5px;
+  height: 398px;
 }
 .gallery__wrap {
   padding-top: 10px;
 }
-.gallery-title {
+.gallery__title {
   @include font(500, 12px, 14px, 0em);
   text-transform: uppercase;
   @media screen and (min-width: 768px) {
