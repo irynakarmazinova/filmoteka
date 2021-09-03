@@ -1,50 +1,112 @@
 .header {
   position: relative;
   height: 230px;
-  max-width: 320px;
+  min-width: 320px;
   margin: 0 auto;
   background: rgba(0, 0, 0, 0.56);
+
+  @media screen and (max-width: 767px) {
+    max-width: 320px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    max-width: 1024px;
+  }
 }
 
 .header__container {
   position: absolute;
   height: 230px;
+  min-width: 320px;
+  margin-left: -20px;
   background-image: url('../images/mobile/rectangle@1x.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   z-index: -1;
-}
 
-@media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-  .header__container {
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
     background-image: url('../images/mobile/rectangle@2x.jpg');
+  }
+
+  @media screen and (min-width: 768px) {
+    min-width: 768px;
+    margin-left: -71px;
+    background-image: url('../images/tablet/rectangle@1x.jpg');
+
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url('../images/tablet/rectangle@2x.jpg');
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    min-width: 1024px;
+    background-image: url('../images/desktop/rectangle@1x.jpg');
+
+    @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+      background-image: url('../images/desktop/rectangle@2x.jpg');
+    }
   }
 }
 
 .wrapper {
   display: flex;
   align-items: baseline;
-  padding-left: 21px;
+  padding-left: 1px;
   padding-top: 46px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
+
+  @media screen and (min-width: 768px) {
+    padding-left: -1px;
+    padding-top: 40px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding-top: 38px;
+  }
 }
 
 .icon-film {
   width: 24px;
   height: 24px;
   margin-right: auto;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 10px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin-right: 12px;
+  }
 }
 
 .logo {
   display: none;
   margin-right: auto;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+    @include font(500, 30px, 35px, 0em);
+    padding-bottom: 3px;
+    color: $primary-color;
+    transform: translateY(-2px);
+  }
 }
 
 .menu__list {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
+  @include flex-center;
+
+  @media screen and (min-width: 768px) {
+    margin-right: 5px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin-right: 0;
+  }
 }
 
 .menu__item:not(:last-child) {
@@ -52,11 +114,7 @@
 }
 
 .menu__link {
-  font-family: $primary-font;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.17;
+  @include font(500, 12px, 14px, 0em);
   text-transform: uppercase;
   color: $primary-color;
 }
@@ -69,7 +127,7 @@
 }
 
 .search {
-  display: block;
+  @include flex-center;
   margin: 0 auto;
   width: 280px;
   background-color: transparent;
@@ -79,103 +137,32 @@
 
   &::placeholder {
     font-family: $primary-font;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.14;
+    @include font(400, 14px, 16px, 0em);
     color: $primary-color;
   }
-}
 
-.form {
-  display: flex;
-  align-items: center;
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
 }
 
 .button-search {
   position: relative;
   border: none;
   background-color: transparent;
-  transform: translate(-32px, -4px);
+  transform: translate(262px, -34px);
+
+  @media screen and (min-width: 768px) {
+    transform: translate(463px, -34px);
+  }
+
+  @media screen and (min-width: 1200px) {
+    transform: translate(590px, -33px);
+  }
 }
 
 .search-icon {
   position: absolute;
   width: 12px;
   height: 12px;
-}
-
-@media screen and (min-width: 768px) {
-  .header {
-    max-width: 768px;
-  }
-
-  .wrapper {
-    padding-left: 71px;
-  }
-
-  .icon-film {
-    margin-right: 10px;
-  }
-
-  .logo {
-    display: block;
-    font-family: $primary-font;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.17;
-    padding-bottom: 3px;
-    color: $primary-color;
-  }
-
-  .menu__list {
-    margin-right: 76px;
-  }
-
-  .search {
-    width: 336px;
-  }
-
-  .button-search {
-    transform: translate(-228px, -4px);
-  }
-
-  .header__container {
-    background-image: url('../images/tablet/rectangle@1x.jpg');
-  }
-
-  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    .header__container {
-      background-image: url('../images/tablet/rectangle@2x.jpg');
-    }
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .header {
-    max-width: 1024px;
-  }
-
-  .icon-film {
-    margin-right: 12px;
-  }
-
-  .menu__list {
-    margin-right: 71px;
-  }
-
-  .button-search {
-    transform: translate(-356px, -4px);
-  }
-
-  .header__container {
-    background-image: url('../images/desktop/rectangle@1x.jpg');
-  }
-
-  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-    .header__container {
-      background-image: url('../images/desktop/rectangle@2x.jpg');
-    }
-  }
 }

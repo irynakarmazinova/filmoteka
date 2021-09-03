@@ -1,12 +1,14 @@
 <header class="header">
-  <div class="header__container container"></div>
+  <div class="container">
+    <div class="header__container"></div>
   <div class="wrapper">
     <img class="icon-film" src="./images/film-icon.png" alt="film frame" />
-    <h1 class="logo">Filmoteka</h1>
+    <h1 class="logo-img visually-hidden">Filmoteka</h1>
+    <a class="logo link" href="index.html">Filmoteka</a>
     <nav class="navigation">
       <ul class="menu__list list">
         <li class="menu__item">
-          <a class="menu__link link current" href="#">Home</a>
+          <a class="menu__link link current" href="index.html">Home</a>
         </li>
         <li class="menu__item">
           <a class="menu__link link" href="#">my library</a>
@@ -15,11 +17,14 @@
     </nav>
   </div>
   <div class="form-container">
-    <form class="form" action="">
-      <input type="text" class="search" placeholder="Поиск фильмов" />
+    <form class="search-form" action="">
+      <label for="searchQuery" class="sr-only"></label>
+      <input type="text" class="search" name="query"
+      id="searchQuery" placeholder="Поиск фильмов" autocomplete="off"/>
       <button class="button-search" type="submit">
         <img class="search-icon" src="./images/search@2x.png" alt="search icon" />
       </button>
     </form>
   </div>
+</div>
 </header>
