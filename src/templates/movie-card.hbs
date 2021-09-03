@@ -1,0 +1,11 @@
+{{#each results}}
+<li class="gallery-item">
+    <div class="photo-card">
+        <img src='https://image.tmdb.org/t/p/w200{{poster_path}}' alt="{{title}}" data-source='{{id}}' />
+        <div class=" gallery-wrap">
+            <p class="photo-title">{{original_title}}{{name}}</p>
+            <p class="photo-action">Drama | {{release_date}}</p>
+        </div>
+    </div>
+</li>
+{{/each}}

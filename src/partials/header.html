@@ -15,8 +15,9 @@
     </nav>
   </div>
   <div class="form-container">
-    <form class="form" action="">
-      <input type="text" class="search" placeholder="Поиск фильмов" />
+    <form class="form search-form js-search-form" action="#">
+      <label for="searchQuery" class="sr-only"></label>
+      <input type="text" class="search" name="query" id="searchQuery" placeholder="Поиск фильмов" autocomplete="off"/>
       <button class="button-search" type="submit">
         <img class="search-icon" src="./images/search@2x.png" alt="search icon" />
       </button>
