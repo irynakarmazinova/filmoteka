@@ -1,15 +1,20 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
-import getRefs from './refs';
-const refs = getRefs();
-const api = new API();
-refs.loadBtn.addEventListener('click', onClick);
+import { searchForm, gallery, loadBtn, container} from './refs';
 
-function renderMovieCard(movie) {
-   refs.gallery.insertAdjacentHTML('beforeend', movieTmpl(movie))
-}
+const api = new API();
+
+loadBtn.addEventListener('click', onClick);
 
 api.fetchMovie().then(renderMovieCard).catch(error => console.log(error));
+
+
+
+function renderMovieCard(movie) {
+   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie))
+}
+
+
 
 function onClick(e) {
      e.preventDefault();
@@ -19,9 +24,11 @@ function onClick(e) {
   }).catch(error => console.log(error))
 }
 
+
+
 function scrollEnd() {
     setTimeout(() => {
-        refs.container.scrollIntoView({
+        container.scrollIntoView({
             behavior: 'smooth',
             block: 'end',
         })
