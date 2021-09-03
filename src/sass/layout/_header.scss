@@ -13,7 +13,7 @@
     max-width: 768px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     max-width: 1024px;
   }
 }
@@ -43,7 +43,7 @@
     }
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     min-width: 1024px;
     background-image: url('../images/desktop/rectangle@1x.jpg');
 
@@ -65,7 +65,7 @@
     padding-top: 40px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     padding-top: 38px;
   }
 }
@@ -79,7 +79,7 @@
     margin-right: 10px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     margin-right: 12px;
   }
 }
@@ -104,7 +104,7 @@
     margin-right: 5px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     margin-right: 0;
   }
 }
@@ -156,7 +156,7 @@
     transform: translate(463px, -34px);
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1024px) {
     transform: translate(590px, -33px);
   }
 }
