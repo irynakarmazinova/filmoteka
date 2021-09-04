@@ -5,21 +5,22 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { renderMoviesFromDB, addUserToDB, addMovieToDB } from './firebaseApi';
+import { getMoviesFromDB, addUserToDB } from './database';
+import { registrationForm, signInForm, queuedBtn, watchedBtn, signOutBtn } from './refs';
+import {
+  successfulRegistrationMsg,
+  authErrorMsg,
+  signOutMsg,
+  successfulSignInMsg,
+  registrationErrorMsg,
+  errorMsg,
+} from './pontify';
 
 const auth = getAuth();
 handleAuthStateChange();
 
-const refs = {
-  registrationForm: document.getElementById('registration-form-js'),
-  signInForm: document.getElementById('signin-form-js'),
-  queuedBtn: document.querySelector('.queue-btn-js'),
-  watchedBtn: document.querySelector('.watched-btn-js'),
-  signOutBtn: document.querySelector('.signout-btn-js'),
-};
-
-refs.registrationForm.addEventListener('submit', handleRegistration);
-refs.signInForm.addEventListener('submit', handleSignIn);
+// registrationForm.addEventListener('submit', handleRegistration);
+// signInForm.addEventListener('submit', handleSignIn);
 
 function handleRegistration(e) {
   e.preventDefault();
@@ -30,12 +31,11 @@ function handleRegistration(e) {
     .then(userCredential => {
       const user = userCredential.user;
       addUserToDB(user.uid);
-      //thank you for registration msg
+      successfulRegistrationMsg();
     })
     .catch(error => {
       const errorCode = error.code;
-      console.log(errorCode);
-      ///show message err pontify
+      registrationErrorMsg(errorCode.slice(5).replace(/-/g, ' '));
     });
 }
 
@@ -45,54 +45,46 @@ function handleSignIn(e) {
   const password = e.currentTarget.elements.password.value;
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
+      successfulSignInMsg();
       const user = userCredential.user;
-      renderMoviesFromDB(user.uid, 'watchedMovies');
+      getMoviesFromDB(user.uid, 'watchedMovies');
     })
-    .catch(error => {
-      console.log('errrrrrrooooor');
-      // error msg
-    });
+    .catch(authErrorMsg);
 }
 
 function handleSignOut() {
   signOut(auth)
     .then(() => {
-      console.log('goodbye');
-      //goodbye msg
+      signOutMsg();
+      refs.signOutBtn.removeEventListener('click', handleSignOut);
+      refs.watchedBtn.removeEventListener('click', e => {
+        renderMoviesFromDB(userId, 'watchedMovies');
+      });
+      refs.queuedBtn.removeEventListener('click', e => {
+        renderMoviesFromDB(userId, 'queuedMovies');
+      });
     })
     .catch(error => {
-      console.log('an error happened');
+      errorMsg;
     });
 }
 
 function handleAuthStateChange() {
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log('hello msg');
-      addEventListeners();
-      //   const userId = user.uid;
+      const userId = user.uid;
+      watchedBtn.addEventListener('click', e => {
+        getMoviesFromDB(userId, 'watchedMovies');
+      });
+      signOutBtn.addEventListener('click', handleSignOut);
+      queuedBtn.addEventListener('click', e => {
+        getMoviesFromDB(userId, 'queuedMovies');
+      });
+      registrationForm.removeEventListener('submit', handleRegistration);
+      signInForm.removeEventListener('submit', handleSignIn);
     } else {
-      removeEventListeners();
+      registrationForm.addEventListener('submit', handleRegistration);
+      signInForm.addEventListener('submit', handleSignIn);
     }
   });
-}
-
-function addEventListeners() {
-  refs.signOutBtn.addEventListener('click', handleSignOut);
-  refs.watchedBtn.addEventListener('click', e => {
-    renderMoviesFromDB(userId, 'watchedMovies');
-  });
-  refs.queuedBtn.addEventListener('click', e => {
-    renderMoviesFromDB(userId, 'queuedMovies');
-  });
-}
-
-function removeEventListeners() {
-  refs.watchedBtn.removeEventListener('click', e => {
-    renderMoviesFromDB(userId, 'watchedMovies');
-  });
-  refs.queuedBtn.removeEventListener('click', e => {
-    renderMoviesFromDB(userId, 'queuedMovies');
-  });
-  refs.signOutBtn.removeEventListener('click', handleSignOut);
 }
