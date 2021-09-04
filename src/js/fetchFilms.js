@@ -11,7 +11,7 @@ api
   .then(renderMovieCard)
   .catch(error => console.log(error));
 
-function renderMovieCard(movie) {
+export default function renderMovieCard(movie) {
   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 }
 

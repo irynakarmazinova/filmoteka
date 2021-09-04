@@ -1,7 +1,6 @@
 import API from './fetchApi';
 import LoadMoreBtn from './loadMoreBtnClass';
-import movieTmpl from '../templates/movie-card.hbs';
-import { gallery } from './refs';
+import renderMovieCard from './fetchFilms';
 
 const api = new API();
 
@@ -11,10 +10,6 @@ const loadMoreBtn = new LoadMoreBtn({
 });
 
 loadMoreBtn.refs.button.addEventListener('click', onClick);
-
-function renderMovieCard(movie) {
-  gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
-}
 
 function onClick(e) {
   e.preventDefault();
