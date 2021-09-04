@@ -12,3 +12,6 @@ import './js/fetchFilms';
 import './js/loadMoreBtn';
 
 import './js/footer-modal-window';
+
+import './js/database';
+import './js/auth';
