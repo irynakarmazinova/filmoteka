@@ -11,3 +11,6 @@ import './js/header';
 import './js/fetchFilms';
 
 import './js/footer-modal-window';
+
+import './js/firebaseApi';
+import './js/auth';
