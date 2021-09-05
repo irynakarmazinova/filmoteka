@@ -1,5 +1,6 @@
 body {
-  $primary-font: 'Roboto', sans-serif;
+  min-height: 100vh;
+  font-family: $primary-font;
 }
 
 img {
@@ -40,4 +41,8 @@ button {
 
 .address {
   font-style: normal;
+}
+
+.is-hidden {
+  display: none;
 }

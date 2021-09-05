@@ -1,30 +1,43 @@
-<header class="header">
-  <div class="container">
-    <div class="header__container"></div>
-  <div class="wrapper">
-    <img class="icon-film" src="./images/film-icon.png" alt="film frame" />
-    <h1 class="logo-img visually-hidden">Filmoteka</h1>
-    <a class="logo link" href="index.html">Filmoteka</a>
-    <nav class="navigation">
-      <ul class="menu__list list">
-        <li class="menu__item">
-          <a class="menu__link link current" href="index.html">Home</a>
-        </li>
-        <li class="menu__item">
-          <a class="menu__link link" href="#">my library</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="form-container">
-    <form class="search-form" action="">
-      <label for="searchQuery" class="sr-only"></label>
-      <input type="text" class="search" name="query"
-      id="searchQuery" placeholder="Поиск фильмов" autocomplete="off"/>
-      <button class="button-search" type="submit">
-        <img class="search-icon" src="./images/search@2x.png" alt="search icon" />
-      </button>
-    </form>
-  </div>
+
+<header class="header header-home">
+  <div class="header__container container">
+    <!-- <div class="header__container"></div> -->
+      <div class="wrapper">
+        <img class="icon-film" src="./images/film-icon.png" alt="film frame" />
+        <h1 class="logo-img visually-hidden">Filmoteka</h1>
+        <a class="logo link" id="logo" href="#">Filmoteka</a>
+        <nav class="navigation">
+          <ul class="menu__list list">
+            <li class="menu__item">
+              <!-- Вешаем класс current через js для подчеркивания текущей страницы -->
+              <button class="menu__link js-menu__button current" id="home" type="button">Home</button>
+            </li>
+            <li class="menu__item">
+              <!-- Вешаем класс current через js для подчеркивания текущей страницы -->
+              <button class="menu__link js-menu__button" id="my-library" type="button">My library</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="markup-wrapper">
+        <!-- Динамически рендерим разметку хэдэра для Home -->
+        <form class="search-form">
+          <label for="searchQuery" class="sr-only"></label>
+          <input class="search" type="text" name="query"
+          id="searchQuery" placeholder="Movie search" autocomplete="off"/>
+          <button class="button-search" type="submit"></button>
+        </form>
+        <!-- Динамически рендерим разметку хэдэра для My library -->
+        <div class="btn-container__library visually-hidden">
+          <ul class="btn-list list">
+            <li class="btn-item">
+            <button class="btn-liba button-watched watched-btn-js" id="btn-watched" type="submit">Watched</button>
+            </li>
+            <li class="btn-item">
+            <button class="btn-liba button-queue queue-btn-js" id="btn-queue" type="submit">queue</button>
+            </li>
+          </ul>
+        </div>
+      </div>
 </div>
 </header>

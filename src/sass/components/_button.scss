@@ -1,0 +1,28 @@
+.btn {
+  @include flex-center;
+  width: 160px;
+  margin: 0 auto;
+  padding: 11px 25px;
+  text-transform: uppercase;
+
+  font-family: $primary-font;
+  @include font(700, 14px, 18px, 0em);
+
+  color: $accent-color;
+  background: $primary-color;
+  border-radius: 22px;
+  border-color: $accent-color;
+
+  transition: color 250ms linear, background-color 250ms linear;
+
+  &:hover,
+  &:focus {
+    color: $primary-color;
+    background: $accent-color;
+    .inner.one,
+    .inner.two,
+    .inner.three {
+      border-color: $primary-color;
+    }
+  }
+}
