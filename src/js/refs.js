@@ -14,12 +14,27 @@ const refs = {
   registrationForm: document.getElementById('registration-form-js'),
   signInForm: document.getElementById('signin-form-js'),
   signOutBtn: document.querySelector('.signout-btn-js'),
-     backdrop: document.querySelector('.backdrop'),
+  backdrop: document.querySelector('.backdrop'),
   modalCloseBtn: document.querySelector('.team__modal-close-btn'),
-  modal: document.querySelector('.modal'),
   footerLink: document.getElementById('footer__link'),
-
 };
 
-export const { searchForm, gallery, loadBtn, container, registrationForm,
-  signInForm, logo, homeBtn, myLibraryBtn, header, watchedBtn, queuedBtn, btnContainerLibrary, signOutBtn, backdrop, modalCloseBtn, footerLink} = refs;
+export const {
+  searchForm,
+  gallery,
+  loadBtn,
+  container,
+  registrationForm,
+  signInForm,
+  logo,
+  homeBtn,
+  myLibraryBtn,
+  header,
+  watchedBtn,
+  queuedBtn,
+  btnContainerLibrary,
+  signOutBtn,
+  backdrop,
+  modalCloseBtn,
+  footerLink,
+} = refs;
