@@ -1,52 +1,54 @@
 import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import ApiService from './fetchApi';
-import movieModalTpl from '../templates/movie-modal'; 
-import { gallery } from './refs';
+import movieModalTpl from '../templates/movie-modal';
+import { gallery, cardSectionLoader } from './refs';
 
 const Api = new ApiService();
 
 const createMovieModal = markup => {
-   const movieModal = basicLightbox.create(markup, {
-      onShow: (instance) => {
-         document.body.style.overflow = 'hidden';
-      
-         const modal = instance.element();
-         const modalCloseBtn = modal.querySelector('.js-modal-close');
+  const movieModal = basicLightbox.create(markup, {
+    onShow: instance => {
+      document.body.style.overflow = 'hidden';
 
-         modalCloseBtn.addEventListener('click', instance.close);
-         window.addEventListener('keydown', (e) => {
-            if (e.code !== 'Escape') {
-               return;
-            }
+      const modal = instance.element();
+      const modalCloseBtn = modal.querySelector('.js-modal-close');
 
-            instance.close();
-         });
-      },
-      onClose: (instance) => {
-         document.body.style.overflow = 'visible';
-      }
-   });
+      modalCloseBtn.addEventListener('click', instance.close);
+      window.addEventListener('keydown', e => {
+        if (e.code !== 'Escape') {
+          return;
+        }
 
-   return movieModal;
-}
+        instance.close();
+      });
+    },
+    onClose: instance => {
+      document.body.style.overflow = 'visible';
+    },
+  });
 
-const onGalleryImgClick = async (e) => {
-   const target = e.target;
+  return movieModal;
+};
 
-   if(target.nodeName !== 'IMG') {
-      return;
-   }
+const onGalleryImgClick = async e => {
+  const target = e.target;
 
-   const movieId = target.dataset.source;
+  if (target.nodeName !== 'IMG') {
+    return;
+  }
 
-   const movieDetails = await Api.fetchMovieDetail(movieId);
+  const movieId = target.dataset.source;
 
-   const movieModalMarkup = movieModalTpl(movieDetails);
+  cardSectionLoader.classList.remove('is-hidden');
 
-   const movieModal = createMovieModal(movieModalMarkup);
-   movieModal.show();
-}
+  const movieDetails = await Api.fetchMovieDetail(movieId);
 
+  const movieModalMarkup = movieModalTpl(movieDetails);
+
+  const movieModal = createMovieModal(movieModalMarkup);
+  movieModal.show();
+  cardSectionLoader.classList.add('is-hidden');
+};
 
 gallery.addEventListener('click', onGalleryImgClick);

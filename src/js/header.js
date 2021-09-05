@@ -1,8 +1,20 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
 import {
-  searchForm, gallery, loadBtn, container, registrationForm,
-  signInForm, logo, homeBtn, myLibraryBtn, header, watchedBtn, queuedBtn, btnContainerLibrary, signOutBtn
+  searchForm,
+  gallery,
+  loadBtn,
+  container,
+  registrationForm,
+  signInForm,
+  logo,
+  homeBtn,
+  myLibraryBtn,
+  header,
+  watchedBtn,
+  queuedBtn,
+  btnContainerLibrary,
+  signOutBtn,
 } from './refs';
 
 const api = new API();
@@ -39,7 +51,6 @@ function renderMovieCard(movie) {
   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 }
 
-
 function onSearch(e) {
   e.preventDefault();
   clearMovieCard();
@@ -47,7 +58,20 @@ function onSearch(e) {
   api.resetPage();
   api
     .fetchSearch()
-    .then(renderMovieCard)
+    .then(films => {
+      renderMovieCard(films);
+
+      if (films.total_results === 0) {
+        loadBtn.classList.add('not-found');
+        return;
+      }
+
+      if (!loadBtn.classList.contains('not-found')) {
+        return;
+      }
+
+      loadBtn.classList.remove('not-found');
+    })
     .catch(error => console.log(error));
   e.currentTarget.elements.query.value = '';
 }
@@ -92,5 +116,5 @@ function addBtnWatchedAccentColor() {
 
 function addBtnQueueAccentColor() {
   queuedBtn.classList.add('accent-color');
-    watchedBtn.classList.remove('accent-color');
+  watchedBtn.classList.remove('accent-color');
 }

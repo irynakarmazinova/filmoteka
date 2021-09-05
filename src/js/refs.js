@@ -17,6 +17,7 @@ const refs = {
   backdrop: document.querySelector('.backdrop'),
   modalCloseBtn: document.querySelector('.team__modal-close-btn'),
   footerLink: document.getElementById('footer__link'),
+  cardSectionLoader: document.getElementById('cardSectionLoader'),
 };
 
 export const {
@@ -37,4 +38,5 @@ export const {
   backdrop,
   modalCloseBtn,
   footerLink,
+  cardSectionLoader,
 } = refs;
