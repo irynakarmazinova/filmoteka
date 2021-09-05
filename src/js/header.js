@@ -47,7 +47,20 @@ function onSearch(e) {
   api.resetPage();
   api
     .fetchSearch()
-    .then(renderMovieCard)
+    .then(films => {
+      renderMovieCard(films);
+
+      if(films.total_results === 0) {
+        loadBtn.classList.add('not-found');
+        return;
+      }
+
+      if(!loadBtn.classList.contains('not-found')) {
+        return;
+      }
+
+      loadBtn.classList.remove('not-found');
+    })
     .catch(error => console.log(error));
   e.currentTarget.elements.query.value = '';
 }
