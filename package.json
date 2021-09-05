@@ -31,6 +31,7 @@
     "@pnotify/core": "^5.2.0",
     "@pnotify/mobile": "^5.2.0",
     "basiclightbox": "^5.0.4",
+    "firebase": "^9.0.1",
     "gh-pages": "^3.2.3"
   }
 }

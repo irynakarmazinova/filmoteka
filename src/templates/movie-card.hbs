@@ -1,14 +1,19 @@
 {{#each results}}
-<li class="gallery__item">
-    <div class="gallery__card">
-        <img class="gallery__image" src='https://image.tmdb.org/t/p/w200{{poster_path}}' alt="{{title}}" data-source='{{id}}' />
-        <div class=" gallery__wrap">
-            <p class="gallery-title">{{original_title}}{{name}}</p>
-            <div class="gallery__wrap-advantages ">
-            <p class="gallery__action">Drama | {{release_date}}</p>
-            <p class=" gallery__average">{{vote_average}}</p>
-            </div>
+  <li class='gallery__item'>
+    <div class='gallery__card'>
+      <img
+        class='gallery__image'
+        src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+        alt='{{title}}'
+        data-source='{{id}}'
+      />
+      <div class='gallery__wrap'>
+        <p class='gallery__title'>{{original_title}}{{name}}</p>
+        <div class='gallery__wrap-advantages'>
+          <p class='gallery__action'>Drama | {{release_date}}</p>
+          <p class='gallery__average'>{{vote_average}}</p>
         </div>
+      </div>
     </div>
-</li>
+  </li>
 {{/each}}

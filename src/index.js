@@ -9,11 +9,8 @@ import '@pnotify/core/dist/BrightTheme.css'; //color theme for error
 defaultModules.set(PNotifyMobile, {});
 import './js/header';
 import './js/fetchFilms';
-
+import './js/loadMoreBtn';
 import './js/footer-modal-window';
-
-
-
-
-
+import './js/database';
+import './js/auth';
 import './js/modalFilm';
