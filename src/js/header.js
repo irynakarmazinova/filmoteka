@@ -1,17 +1,8 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
 import {
-  searchForm,
-  gallery,
-  loadBtn,
-  container,
-  logo,
-  homeBtn,
-  myLibraryBtn,
-  header,
-  btnWatched,
-  btnQueue,
-  btnContainerLibrary,
+  searchForm, gallery, loadBtn, container, registrationForm,
+  signInForm, logo, homeBtn, myLibraryBtn, header, watchedBtn, queuedBtn, btnContainerLibrary, signOutBtn
 } from './refs';
 
 const api = new API();
@@ -21,11 +12,11 @@ myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onLogoClick);
 searchForm.addEventListener('submit', onSearch);
 
-btnWatched.addEventListener('submit', onSubmitWatched);
-btnWatched.addEventListener('click', onSubmitWatched);
+watchedBtn.addEventListener('submit', onSubmitWatched);
+watchedBtn.addEventListener('click', onSubmitWatched);
 
-btnQueue.addEventListener('submit', onSubmitQueue);
-btnQueue.addEventListener('click', onSubmitQueue);
+queuedBtn.addEventListener('submit', onSubmitQueue);
+queuedBtn.addEventListener('click', onSubmitQueue);
 
 // Функции вызова отрисовки разметки по нажатию на кнопки
 function onHomeBtnClick(e) {
@@ -95,11 +86,11 @@ function markupMyLibrary() {
 }
 
 function addBtnWatchedAccentColor() {
-  btnWatched.classList.add('accent-color');
-  btnQueue.classList.remove('accent-color');
+  watchedBtn.classList.add('accent-color');
+  queuedBtn.classList.remove('accent-color');
 }
 
 function addBtnQueueAccentColor() {
-  btnQueue.classList.add('accent-color');
-    btnWatched.classList.remove('accent-color');
+  queuedBtn.classList.add('accent-color');
+    watchedBtn.classList.remove('accent-color');
 }
