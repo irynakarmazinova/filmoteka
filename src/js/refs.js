@@ -7,10 +7,14 @@ const refs = {
   homeBtn: document.querySelector('.menu__link'),
   myLibraryBtn: document.getElementById('my-library'),
   header: document.querySelector('.header'),
-  btnWatched: document.getElementById('btn-watched'),
-  btnQueue: document.getElementById('btn-queue'),
+  watchedBtn: document.querySelector('.watched-btn-js'),
+  queuedBtn: document.querySelector('.queue-btn-js'),
   btnContainerLibrary: document.querySelector('.btn-container__library'),
+  registrationForm: document.getElementById('registration-form-js'),
+  signInForm: document.getElementById('signin-form-js'),
+  signOutBtn: document.querySelector('.signout-btn-js'),
 
 };
 
-export const { searchForm, gallery, loadBtn, container, logo, homeBtn, myLibraryBtn, header, btnWatched, btnQueue, btnContainerLibrary, btnItem } = refs;
+export const { searchForm, gallery, loadBtn, container, registrationForm,
+  signInForm, logo, homeBtn, myLibraryBtn, header, watchedBtn, queuedBtn, btnContainerLibrary, signOutBtn } = refs;
