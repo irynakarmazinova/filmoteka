@@ -3,6 +3,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   loadBtn: document.querySelector('.btn'),
   container: document.getElementById('js-container'),
+
   logo: document.getElementById('logo'),
   homeBtn: document.querySelector('.menu__link'),
   myLibraryBtn: document.getElementById('my-library'),
@@ -13,8 +14,27 @@ const refs = {
   registrationForm: document.getElementById('registration-form-js'),
   signInForm: document.getElementById('signin-form-js'),
   signOutBtn: document.querySelector('.signout-btn-js'),
-
+  backdrop: document.querySelector('.backdrop'),
+  modalCloseBtn: document.querySelector('.team__modal-close-btn'),
+  footerLink: document.getElementById('footer__link'),
 };
 
-export const { searchForm, gallery, loadBtn, container, registrationForm,
-  signInForm, logo, homeBtn, myLibraryBtn, header, watchedBtn, queuedBtn, btnContainerLibrary, signOutBtn } = refs;
+export const {
+  searchForm,
+  gallery,
+  loadBtn,
+  container,
+  registrationForm,
+  signInForm,
+  logo,
+  homeBtn,
+  myLibraryBtn,
+  header,
+  watchedBtn,
+  queuedBtn,
+  btnContainerLibrary,
+  signOutBtn,
+  backdrop,
+  modalCloseBtn,
+  footerLink,
+} = refs;
