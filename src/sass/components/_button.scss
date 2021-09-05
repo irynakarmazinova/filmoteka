@@ -25,4 +25,8 @@
       border-color: $primary-color;
     }
   }
+
+  &.not-found {
+    display: none;
+  }
 }
