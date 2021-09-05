@@ -11,3 +11,9 @@ import './js/header';
 import './js/fetchFilms';
 
 import './js/footer-modal-window';
+
+
+
+
+
+import './js/modalFilm';
