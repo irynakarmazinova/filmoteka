@@ -38,7 +38,6 @@ const database = getDatabase();
 const auth = getAuth();
 handleAuthStateChange();
 
-
 //user registration function
 function handleRegistration(e) {
   e.preventDefault();
@@ -57,7 +56,6 @@ function handleRegistration(e) {
     });
 }
 
-
 //user sign in function
 function handleSignIn(e) {
   e.preventDefault();
@@ -71,7 +69,6 @@ function handleSignIn(e) {
     })
     .catch(authErrorMsg);
 }
-
 
 //user sign out function
 function handleSignOut() {
@@ -92,8 +89,7 @@ function handleSignOut() {
     });
 }
 
-
-//function that manages actions applied when user is logged in/logged out 
+//function that manages actions applied when user is logged in/logged out
 function handleAuthStateChange() {
   onAuthStateChanged(auth, user => {
     if (user) {
@@ -112,7 +108,6 @@ function handleAuthStateChange() {
     }
   });
 }
-
 
 //functions for managing event listeners as user  is logged in and logged out
 function manageLogInEvents() {
