@@ -27,12 +27,19 @@ import {
   errorMsg,
 } from './pontify';
 import { markupMyLibrary, markupHome, onLibraryBtnClick } from './header';
-import { closeRegistrationModal, toggleSignInModal, openRegistrationModal } from './modalAuth';
+import {
+  closeRegistrationModal,
+  openSignInModal,
+  openRegistrationModal,
+  closeSignInModal,
+} from './modalAuth';
 import { getDatabase } from 'firebase/database';
 const database = getDatabase();
 const auth = getAuth();
 handleAuthStateChange();
 
+
+//user registration function
 function handleRegistration(e) {
   e.preventDefault();
   markupMyLibrary();
@@ -50,6 +57,8 @@ function handleRegistration(e) {
     });
 }
 
+
+//user sign in function
 function handleSignIn(e) {
   e.preventDefault();
   markupMyLibrary();
@@ -58,13 +67,14 @@ function handleSignIn(e) {
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       successfulSignInMsg();
-      toggleSignInModal();
+      closeSignInModal();
     })
     .catch(authErrorMsg);
 }
 
+
+//user sign out function
 function handleSignOut() {
-  console.log('not active');
   signOut(auth, user => {
     const userId = user.uid;
     watchedBtn.removeEventListener('click', e => {
@@ -82,10 +92,11 @@ function handleSignOut() {
     });
 }
 
+
+//function that manages actions applied when user is logged in/logged out 
 function handleAuthStateChange() {
   onAuthStateChanged(auth, user => {
     if (user) {
-      console.log('active');
       const userId = user.uid;
       myLibraryBtn.addEventListener('click', onLibraryBtnClick);
       watchedBtn.addEventListener('click', e => {
@@ -94,25 +105,34 @@ function handleAuthStateChange() {
       queuedBtn.addEventListener('click', e => {
         getMoviesFromDB(userId, 'queuedMovies');
       });
-      signInForm.removeEventListener('submit', handleSignIn);
-      myLibraryBtn.removeEventListener('click', toggleSignInModal);
-      registrationForm.removeEventListener('submit', handleRegistration);
-      modalSignInClose.removeEventListener('click', toggleSignInModal);
-      modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
-      modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
-      goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
-      signOutBtn.addEventListener('click', handleSignOut);
+      manageLogInEvents();
     } else {
       markupHome();
-      registrationForm.addEventListener('submit', handleRegistration);
-      signInForm.addEventListener('submit', handleSignIn);
-      signOutBtn.removeEventListener('click', handleSignOut);
-      myLibraryBtn.addEventListener('click', toggleSignInModal);
-      modalSignInClose.addEventListener('click', toggleSignInModal);
-      modalRegistrationOpen.addEventListener('click', openRegistrationModal);
-      modalRegistrationClose.addEventListener('click', closeRegistrationModal);
-      goToRegistrationBtn.addEventListener('click', openRegistrationModal);
-      myLibraryBtn.removeEventListener('click', onLibraryBtnClick);
+      manageLogOutEvents();
     }
   });
+}
+
+
+//functions for managing event listeners as user  is logged in and logged out
+function manageLogInEvents() {
+  signInForm.removeEventListener('submit', handleSignIn);
+  myLibraryBtn.removeEventListener('click', openSignInModal);
+  registrationForm.removeEventListener('submit', handleRegistration);
+  modalSignInClose.removeEventListener('click', closeSignInModal);
+  modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
+  modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
+  goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
+  signOutBtn.addEventListener('click', handleSignOut);
+}
+
+function manageLogOutEvents() {
+  registrationForm.addEventListener('submit', handleRegistration);
+  signInForm.addEventListener('submit', handleSignIn);
+  signOutBtn.removeEventListener('click', handleSignOut);
+  myLibraryBtn.addEventListener('click', openSignInModal);
+  modalSignInClose.addEventListener('click', closeSignInModal);
+  modalRegistrationOpen.addEventListener('click', openRegistrationModal);
+  modalRegistrationClose.addEventListener('click', closeRegistrationModal);
+  goToRegistrationBtn.addEventListener('click', openRegistrationModal);
 }

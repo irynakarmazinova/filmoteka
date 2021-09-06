@@ -1,14 +1,39 @@
 import { modalSignIn, modalRegistration } from './refs';
 
-function toggleSignInModal() {
-  modalSignIn.classList.toggle('backdrop-is-hidden');
+//functions for opening and closing registration and sing in modals
+function openSignInModal() {
+  modalSignIn.classList.remove('backdrop-is-hidden');
+  window.addEventListener('click', e => {
+    if (e.target.classList.contains('backdrop')) {
+      closeSignInModal();
+    }
+  });
 }
-function openRegistrationModal() {
+function closeSignInModal() {
   modalSignIn.classList.add('backdrop-is-hidden');
-  modalRegistration.classList.remove('backdrop-is-hidden');
-}
-function closeRegistrationModal() {
-  modalRegistration.classList.toggle('backdrop-is-hidden');
+  window.removeEventListener('click', e => {
+    if (e.target.classList.contains('backdrop')) {
+      closeSignInModal();
+    }
+  });
 }
 
-export { closeRegistrationModal, openRegistrationModal, toggleSignInModal };
+function openRegistrationModal() {
+  modalRegistration.classList.remove('backdrop-is-hidden');
+  modalSignIn.classList.add('backdrop-is-hidden');
+  window.addEventListener('click', e => {
+    if (e.target.classList.contains('backdrop')) {
+      closeRegistrationModal();
+    }
+  });
+}
+function closeRegistrationModal() {
+  modalRegistration.classList.add('backdrop-is-hidden');
+  window.removeEventListener('click', e => {
+    if (e.target.classList.contains('backdrop')) {
+      closeRegistrationModal();
+    }
+  });
+}
+
+export { closeRegistrationModal, openRegistrationModal, openSignInModal, closeSignInModal };

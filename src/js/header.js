@@ -20,7 +20,7 @@ import {
 const api = new API();
 
 homeBtn.addEventListener('click', onHomeBtnClick);
-// myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onLogoClick);
 searchForm.addEventListener('submit', onSearch);
 

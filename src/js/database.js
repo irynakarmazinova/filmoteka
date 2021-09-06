@@ -4,6 +4,7 @@ import { gallery } from './refs';
 import { emptyLibraryMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
 
+//database settings
 const firebaseConfig = {
   apiKey: 'AIzaSyD9DuVbKdLwDtku8FtOtjPod4nIuWT1gZ0',
   authDomain: 'filmoteka-7c398.firebaseapp.com',
@@ -17,6 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
+//rendering movies from watched and queue libraries
 function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${userId}/${movieListType}/`))
