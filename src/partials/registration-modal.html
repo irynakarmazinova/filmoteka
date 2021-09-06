@@ -1,0 +1,37 @@
+<div class="backdrop backdrop-is-hidden" data-modal-registration>
+  <div class="auth-modal">
+    <button class="modal__close-button" type="button" data-modal-registration-close>
+      <svg class="modal__close-icon" width="18" height="18">
+        <use href="./images/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <p class="modal__appeal">Welcome</p>
+    <form class="auth-form registration-form-js">
+      <label class="auth-form__field">
+        <span class="auth-form__wrapper">
+          <input class="auth-form__input" type="email" name="email" placeholder="e-mail" required />
+          <svg class="auth-form__icon" width="14" height="14">
+            <use href="./images/sprite.svg#icon-mail"></use>
+          </svg>
+        </span>
+      </label>
+      <label class="auth-form__field">
+        <span class="auth-form__wrapper">
+          <input
+            class="auth-form__input"
+            type="text"
+            name="password"
+            placeholder="password"
+            required
+          />
+          <svg class="auth-form__icon" width="18" height="18">
+            <use href="./images/sprite.svg#icon-key_password"></use>
+          </svg>
+        </span>
+      </label>
+      <button class="auth-form__button btn" type="submit" data-modal-registration-open>
+        <span>Sign up</span>
+      </button>
+    </form>
+  </div>
+</div>

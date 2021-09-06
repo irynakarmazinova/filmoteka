@@ -34,12 +34,8 @@ function getMoviesFromDB(userId, movieListType) {
     .catch(error => errorMsg);
 }
 
-function addUserToDB(userId) {
-  push(ref(database, `users/${userId}`), null).catch(error => errorMsg);
-}
-
 function renderMovies(data) {
   gallery.innerHTML = movieTmpl(data);
 }
 
-export { addUserToDB, getMoviesFromDB };
+export { getMoviesFromDB };
