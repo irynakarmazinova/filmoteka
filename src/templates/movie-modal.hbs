@@ -3,11 +3,7 @@
     <button class='movie-modal__btn-close js-modal-close' aria-label='close'>
     </button>
     <div class='movie-modal__img-wrapper'>
-      <img
-        src='https://image.tmdb.org/t/p/w200{{poster_path}}'
-        alt='{{title}}'
-        class='movie-modal__img'
-      />
+      <img src='https://image.tmdb.org/t/p/w200{{poster_path}}' alt='{{title}}' class='movie-modal__img' />
     </div>
     <div class='movie-modal__info'>
       <h2 class='movie-modal__title'>{{title}}</h2>
@@ -36,7 +32,7 @@
           <span class='movie-modal__characteristic-label'>Genre</span>
           <ul class='movie-modal__characteristic-genres list'>
             {{#each genres}}
-              <li class='movie-modal__characteristic-genre'>{{name}}</li>
+            <li class='movie-modal__characteristic-genre'>{{name}}</li>
             {{/each}}
           </ul>
         </li>
@@ -48,11 +44,13 @@
         </p>
       </div>
       <div class='movie-modal__buttons'>
-        <button class='movie-modal__btn movie-modal__btn--orange'>
-          add to watched
+        <button data-type='watchedMovies' data-action='{{#if isWatched}}remove{{else}}add{{/if}}'
+          class='movie-modal__btn movie-modal__btn--orange'>
+          {{#if isWatched}}remove from{{else}}add to{{/if}} watched
         </button>
-        <button class='movie-modal__btn movie-modal__btn--transparent'>
-          add to queue
+        <button data-type='queuedMovies' data-action='{{#if isQueued}}remove{{else}}add{{/if}}'
+          class='movie-modal__btn movie-modal__btn--transparent'>
+          {{#if isQueued}}remove from{{else}}add to{{/if}} queue
         </button>
       </div>
     </div>
