@@ -1,5 +1,15 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, get, child } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  push,
+  get,
+  child,
+  query,
+  orderByChild,
+  equalTo,
+  remove,
+} from 'firebase/database';
 import { gallery } from './refs';
 import { emptyLibraryMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
@@ -40,4 +50,27 @@ function renderMovies(data) {
   gallery.innerHTML = movieTmpl(data);
 }
 
-export { getMoviesFromDB };
+async function addMovieToDB(userId, movieListType, movie) {
+  await push(ref(database, `users/${userId}/${movieListType}`), movie);
+}
+
+async function removeMovieFromDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  snapshot.forEach(async movieRecord => {
+    await remove(ref(database, `users/${userId}/${movieListType}/${movieRecord.key}`));
+  });
+}
+
+async function isMovieInDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  return snapshot.size;
+}
+
+export { addUserToDB, getMoviesFromDB, addMovieToDB, removeMovieFromDB, getMoviesFromDB, isMovieInDB };
+
