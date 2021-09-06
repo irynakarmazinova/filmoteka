@@ -50,6 +50,64 @@
   margin: 0 10px 0 10px;
 }
 
-.footer__link {
+.footer__link { 
   color: inherit;
 }
+
+  
+
+
+//==================================
+
+.footer__heart {
+  animation: heartbeat 1s infinite;
+  background-color: $accent-color;
+  display: inline-block;
+  height: 10px;
+  margin: 0 10px;
+  transform: rotate(-45deg);  
+  left: 45%; top: 45%;
+  width: 10px;
+
+  &:before,
+  &:after {
+  content: "";
+  background-color: $accent-color;
+  border-radius: 50%;
+  position: absolute;
+  height: 10px;  
+  width: 10px;
+}
+
+  &:before {
+  top: -5px;
+  left: 0;
+}
+
+  &:after {
+  left: 5px;
+  top: 0;
+}
+}
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( 1 )
+      rotate(-45deg);    
+  }
+  20%
+  {
+    transform: scale( 1.25 )
+      rotate(-45deg);  
+  }
+   40%
+  {
+    transform: scale( 1.5 )
+      rotate(-45deg);
+  }
+}
+
+
+
