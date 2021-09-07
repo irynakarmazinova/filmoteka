@@ -72,5 +72,4 @@ async function isMovieInDB(userId, movieListType, movie) {
   return snapshot.size;
 }
 
-export { addUserToDB, getMoviesFromDB, addMovieToDB, removeMovieFromDB, getMoviesFromDB, isMovieInDB };
-
+export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB };

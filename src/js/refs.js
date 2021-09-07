@@ -24,7 +24,7 @@ const refs = {
   modalRegistrationClose: document.querySelector('[data-modal-registration-close]'),
   modalRegistration: document.querySelector('[data-modal-registration]'),
   goToRegistrationBtn: document.querySelector('.auth-form__registration-appeal'),
-
+};
 
 export const {
   searchForm,
