@@ -129,4 +129,10 @@ function addBtnQueueAccentColor() {
   watchedBtn.classList.remove('accent-color');
 }
 
-export { markupMyLibrary, markupHome, onLibraryBtnClick };
+export {
+  markupMyLibrary,
+  markupHome,
+  onLibraryBtnClick,
+  addBtnQueueAccentColor,
+  addBtnWatchedAccentColor,
+};

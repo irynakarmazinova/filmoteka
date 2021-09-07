@@ -11,7 +11,7 @@ import {
   remove,
 } from 'firebase/database';
 import { gallery } from './refs';
-import { emptyLibraryMsg } from './pontify';
+import { emptyLibraryMsg, errorMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
 
 //database settings
@@ -29,21 +29,38 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
 //rendering movies from watched and queue libraries
-function getMoviesFromDB(userId, movieListType) {
+// function getMoviesFromDB(userId, movieListType) {
+//   const dbRef = ref(getDatabase());
+//   get(child(dbRef, `users/${userId}/${movieListType}/`))
+//     .then(snapshot => {
+//       if (!snapshot.exists()) {
+//         emptyLibraryMsg();
+//       } else {
+//         const movies = {
+//           results: [...Object.values(snapshot.val())],
+//         };
+//         renderMovies(movies);
+//       }
+//     })
+//     .catch(error => errorMsg);
+// }
+
+async function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
-  get(child(dbRef, `users/${userId}/${movieListType}/`))
-    .then(snapshot => {
-      if (!snapshot.exists()) {
-        emptyLibraryMsg();
-      } else {
-        const data = Object.values(snapshot.val());
-        const movies = {
-          results: [...data[0]],
-        };
-        renderMovies(movies);
-      }
-    })
-    .catch(error => errorMsg);
+  try {
+    const snapshot = await get(child(dbRef, `users/${userId}/${movieListType}/`));
+
+    if (!snapshot.exists()) {
+      emptyLibraryMsg();
+    } else {
+      const movies = {
+        results: [...Object.values(snapshot.val())],
+      };
+      renderMovies(movies);
+    }
+  } catch {
+    errorMsg;
+  }
 }
 
 function renderMovies(data) {
