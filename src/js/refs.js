@@ -14,7 +14,7 @@ const refs = {
   registrationForm: document.getElementById('registration-form-js'),
   signInForm: document.getElementById('signin-form-js'),
   signOutBtn: document.querySelector('.signout-btn-js'),
-  backdrop: document.querySelector('.backdrop'),
+  backdrop: document.querySelector('.team__backdrop'),
   modalCloseBtn: document.querySelector('.team__modal-close-btn'),
   footerLink: document.getElementById('footer__link'),
   cardSectionLoader: document.getElementById('cardSectionLoader'),
