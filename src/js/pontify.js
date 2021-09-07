@@ -33,7 +33,7 @@ function signOutMsg() {
 
 function emptyLibraryMsg() {
   info({
-    text: `There are no movies in your library!`,
+    text: `There are no movies in this library!`,
     delay: 2000,
   });
 }
@@ -45,9 +45,9 @@ function authErrorMsg() {
   });
 }
 
-function registrationErrorMsg(errorMsg) {
+function registrationErrorMsg(error) {
   error({
-    text: `${errorMsg}!`,
+    text: `${error}!`,
     delay: 2000,
   });
 }
