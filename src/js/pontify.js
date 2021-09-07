@@ -8,6 +8,7 @@ export {
   errorMsg,
   emptyLibraryMsg,
   registrationErrorMsg,
+  wrongRequest,
 };
 
 function successfulRegistrationMsg() {
@@ -55,6 +56,13 @@ function registrationErrorMsg(errorMsg) {
 function errorMsg() {
   error({
     text: 'Ooops, something went wrong...',
+    delay: 2000,
+  });
+}
+
+function wrongRequest() {
+  error({
+    text: 'Search result not successful. Enter the correct movie name!',
     delay: 2000,
   });
 }
