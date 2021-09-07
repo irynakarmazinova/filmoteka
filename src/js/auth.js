@@ -5,19 +5,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { getMoviesFromDB } from './database';
-import {
-  signInForm,
-  registrationForm,
-  queuedBtn,
-  watchedBtn,
-  signOutBtn,
-  myLibraryBtn,
-  modalSignInClose,
-  goToRegistrationBtn,
-  modalRegistrationOpen,
-  modalRegistrationClose,
-} from './refs';
+import { getMoviesFromDB, addUserToDB } from './database';
+import { registrationForm, signInForm, queuedBtn, watchedBtn, signOutBtn } from './refs';
 import {
   successfulRegistrationMsg,
   authErrorMsg,
@@ -26,29 +15,23 @@ import {
   registrationErrorMsg,
   errorMsg,
 } from './pontify';
-import { markupMyLibrary, markupHome, onLibraryBtnClick } from './header';
-import {
-  closeRegistrationModal,
-  openSignInModal,
-  openRegistrationModal,
-  closeSignInModal,
-} from './modalAuth';
-import { getDatabase } from 'firebase/database';
-const database = getDatabase();
+
 const auth = getAuth();
 handleAuthStateChange();
 
-//user registration function
+// registrationForm.addEventListener('submit', handleRegistration);
+// signInForm.addEventListener('submit', handleSignIn);
+
 function handleRegistration(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
 
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
+      const user = userCredential.user;
+      addUserToDB(user.uid);
       successfulRegistrationMsg();
-      closeRegistrationModal();
     })
     .catch(error => {
       const errorCode = error.code;
@@ -56,78 +39,52 @@ function handleRegistration(e) {
     });
 }
 
-//user sign in function
 function handleSignIn(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       successfulSignInMsg();
-      closeSignInModal();
+      const user = userCredential.user;
+      getMoviesFromDB(user.uid, 'watchedMovies');
     })
     .catch(authErrorMsg);
 }
 
-//user sign out function
 function handleSignOut() {
-  signOut(auth, user => {
-    const userId = user.uid;
-    watchedBtn.removeEventListener('click', e => {
-      getMoviesFromDB(userId, 'watchedMovies');
-    });
-    queuedBtn.removeEventListener('click', e => {
-      getMoviesFromDB(userId, 'queuedMovies');
-    });
-  })
+  signOut(auth)
     .then(() => {
       signOutMsg();
+      refs.signOutBtn.removeEventListener('click', handleSignOut);
+      refs.watchedBtn.removeEventListener('click', e => {
+        renderMoviesFromDB(userId, 'watchedMovies');
+      });
+      refs.queuedBtn.removeEventListener('click', e => {
+        renderMoviesFromDB(userId, 'queuedMovies');
+      });
     })
     .catch(error => {
       errorMsg;
     });
 }
 
-//function that manages actions applied when user is logged in/logged out
 function handleAuthStateChange() {
   onAuthStateChanged(auth, user => {
     if (user) {
       const userId = user.uid;
-      myLibraryBtn.addEventListener('click', onLibraryBtnClick);
       watchedBtn.addEventListener('click', e => {
         getMoviesFromDB(userId, 'watchedMovies');
       });
+      signOutBtn.addEventListener('click', handleSignOut);
       queuedBtn.addEventListener('click', e => {
         getMoviesFromDB(userId, 'queuedMovies');
       });
-      manageLogInEvents();
+      registrationForm.removeEventListener('submit', handleRegistration);
+      signInForm.removeEventListener('submit', handleSignIn);
     } else {
-      markupHome();
-      manageLogOutEvents();
+      registrationForm.addEventListener('submit', handleRegistration);
+      signInForm.addEventListener('submit', handleSignIn);
     }
   });
-}
-
-//functions for managing event listeners as user  is logged in and logged out
-function manageLogInEvents() {
-  signInForm.removeEventListener('submit', handleSignIn);
-  myLibraryBtn.removeEventListener('click', openSignInModal);
-  registrationForm.removeEventListener('submit', handleRegistration);
-  modalSignInClose.removeEventListener('click', closeSignInModal);
-  modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
-  modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
-  goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
-  signOutBtn.addEventListener('click', handleSignOut);
-}
-
-function manageLogOutEvents() {
-  registrationForm.addEventListener('submit', handleRegistration);
-  signInForm.addEventListener('submit', handleSignIn);
-  signOutBtn.removeEventListener('click', handleSignOut);
-  myLibraryBtn.addEventListener('click', openSignInModal);
-  modalSignInClose.addEventListener('click', closeSignInModal);
-  modalRegistrationOpen.addEventListener('click', openRegistrationModal);
-  modalRegistrationClose.addEventListener('click', closeRegistrationModal);
-  goToRegistrationBtn.addEventListener('click', openRegistrationModal);
 }
