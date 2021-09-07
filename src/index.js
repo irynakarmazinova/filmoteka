@@ -13,5 +13,8 @@ import './js/fetchFilms';
 import './js/database';
 import './js/auth';
 import './js/modalFilm';
+
 import './js/loadMoreBtn';
 import './js/footer-modal-window';
+
+import './js/modalAuth';

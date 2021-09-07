@@ -1,9 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, get, child } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  push,
+  get,
+  child,
+  query,
+  orderByChild,
+  equalTo,
+  remove,
+} from 'firebase/database';
 import { gallery } from './refs';
 import { emptyLibraryMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
 
+//database settings
 const firebaseConfig = {
   apiKey: 'AIzaSyD9DuVbKdLwDtku8FtOtjPod4nIuWT1gZ0',
   authDomain: 'filmoteka-7c398.firebaseapp.com',
@@ -17,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
+//rendering movies from watched and queue libraries
 function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${userId}/${movieListType}/`))
@@ -34,12 +46,30 @@ function getMoviesFromDB(userId, movieListType) {
     .catch(error => errorMsg);
 }
 
-function addUserToDB(userId) {
-  push(ref(database, `users/${userId}`), null).catch(error => errorMsg);
-}
-
 function renderMovies(data) {
   gallery.innerHTML = movieTmpl(data);
 }
 
-export { addUserToDB, getMoviesFromDB };
+async function addMovieToDB(userId, movieListType, movie) {
+  await push(ref(database, `users/${userId}/${movieListType}`), movie);
+}
+
+async function removeMovieFromDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  snapshot.forEach(async movieRecord => {
+    await remove(ref(database, `users/${userId}/${movieListType}/${movieRecord.key}`));
+  });
+}
+
+async function isMovieInDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  return snapshot.size;
+}
+
+export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB };
