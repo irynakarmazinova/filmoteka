@@ -1,5 +1,6 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
+import { wrongRequest } from './pontify';
 import {
   searchForm,
   gallery,
@@ -70,6 +71,7 @@ function onSearch(e) {
       renderMovieCard(films);
 
       if (films.total_results === 0) {
+        wrongRequest();
         loadBtn.classList.add('not-found');
         return;
       }
