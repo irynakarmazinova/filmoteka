@@ -8,6 +8,7 @@ export {
   errorMsg,
   emptyLibraryMsg,
   registrationErrorMsg,
+  //emptyMovie,
   wrongRequest,
 };
 
@@ -60,9 +61,16 @@ function errorMsg() {
   });
 }
 
-function wrongRequest() {
+function emptyMovie() {
   error({
-    text: 'Search result not successful. Enter the correct movie name!',
+    text: 'Enter the correct movie name!',
     delay: 2000,
   });
+  
+  function wrongRequest() {
+  error({
+    text: 'Search result not successful. Enter the correct movie name!',
+      delay: 2000,
+  });
+    
 }

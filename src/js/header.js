@@ -17,6 +17,7 @@ import {
   btnContainerLibrary,
   signOutBtn,
 } from './refs';
+import { emptyMovie } from './pontify';
 
 const api = new API();
 
@@ -56,6 +57,12 @@ function onSearch(e) {
   e.preventDefault();
   clearMovieCard();
   api.query = e.currentTarget.elements.query.value;
+
+  if (api.query === ' ') {
+    emptyMovie();
+    loadBtn.classList.add('not-found');
+    return;
+  }
 
   api.resetPage();
   api

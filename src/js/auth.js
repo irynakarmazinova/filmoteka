@@ -118,13 +118,13 @@ function manageLogInEvents() {
   modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
   modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
   goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
-  signOutBtn.addEventListener('click', handleSignOut);
+  // signOutBtn.addEventListener('click', handleSignOut);
 }
 
 function manageLogOutEvents() {
   registrationForm.addEventListener('submit', handleRegistration);
   signInForm.addEventListener('submit', handleSignIn);
-  signOutBtn.removeEventListener('click', handleSignOut);
+  // signOutBtn.removeEventListener('click', handleSignOut);
   myLibraryBtn.addEventListener('click', openSignInModal);
   modalSignInClose.addEventListener('click', closeSignInModal);
   modalRegistrationOpen.addEventListener('click', openRegistrationModal);
