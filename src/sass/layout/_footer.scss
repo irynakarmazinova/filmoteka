@@ -39,7 +39,11 @@
       display: inline;
     }
   }
-  
+
+  &__icon-heart {
+    fill: $accent-color;
+    margin: 0 10px 0 10px;
+  }
 
   &__text-developed {
     display: inline;
@@ -47,61 +51,5 @@
 
   &__link {
     color: inherit;
-  }
-}
-
-
-// стили для сердечка
-
-.heart {
-  animation: heartbeat 1s infinite;
-  background-color: $accent-color;
-  display: inline-block;
-  height: 10px;
-  margin: 0 10px;
-  
-  
-  transform: rotate(-45deg);
-  
-  left: 45%; top: 45%;
-  width: 10px;
-}
-
-.heart:before,
-.heart:after {
-  content: "";
-  background-color: $accent-color;
-  border-radius: 50%;
-  height: 10px;
-  position: absolute;
-  width: 10px;
-}
-
-.heart:before {
-  top: -5px;
-  left: 0;
-}
-
-.heart:after {
-  left: 5px;
-  top: 0;
-}
-
-@keyframes heartbeat
-{
-  0%
-  {
-    transform: scale( 1 )
-      rotate(-45deg);    
-  }
-  20%
-  {
-    transform: scale( 1.25 )
-      rotate(-45deg);  
-  }
-   40%
-  {
-    transform: scale( 1.5 )
-      rotate(-45deg);
   }
 }
