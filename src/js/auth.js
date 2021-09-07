@@ -1,3 +1,5 @@
+import API from './fetchApi';
+import movieTmpl from '../templates/movie-card.hbs';
 import {
   getAuth,
   onAuthStateChanged,
@@ -7,10 +9,12 @@ import {
 } from 'firebase/auth';
 import { getMoviesFromDB } from './database';
 import {
+  gallery,
   signInForm,
   registrationForm,
   queuedBtn,
   watchedBtn,
+  homeBtn,
   signOutBtn,
   myLibraryBtn,
   modalSignInClose,
@@ -26,7 +30,13 @@ import {
   registrationErrorMsg,
   errorMsg,
 } from './pontify';
-import { markupMyLibrary, markupHome, onLibraryBtnClick } from './header';
+import {
+  markupMyLibrary,
+  markupHome,
+  onLibraryBtnClick,
+  addBtnQueueAccentColor,
+  addBtnWatchedAccentColor,
+} from './header';
 import {
   closeRegistrationModal,
   openSignInModal,
@@ -34,7 +44,9 @@ import {
   closeSignInModal,
 } from './modalAuth';
 import { getDatabase } from 'firebase/database';
-const database = getDatabase();
+
+const api = new API();
+// const database = getDatabase();
 const auth = getAuth();
 handleAuthStateChange();
 
@@ -74,6 +86,7 @@ function handleSignIn(e) {
 function handleSignOut() {
   signOut(auth, user => {
     const userId = user.uid;
+    myLibraryBtn.removeEventListener('click', e => getMoviesFromDB(userId, 'watchedMovies'));
     watchedBtn.removeEventListener('click', e => {
       getMoviesFromDB(userId, 'watchedMovies');
     });
@@ -94,7 +107,8 @@ function handleAuthStateChange() {
   onAuthStateChanged(auth, user => {
     if (user) {
       const userId = user.uid;
-      myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+      addBtnWatchedAccentColor();
+      myLibraryBtn.addEventListener('click', e => getMoviesFromDB(userId, 'watchedMovies'));
       watchedBtn.addEventListener('click', e => {
         getMoviesFromDB(userId, 'watchedMovies');
       });
@@ -103,7 +117,7 @@ function handleAuthStateChange() {
       });
       manageLogInEvents();
     } else {
-      markupHome();
+      goToHomePage();
       manageLogOutEvents();
     }
   });
@@ -111,6 +125,8 @@ function handleAuthStateChange() {
 
 //functions for managing event listeners as user  is logged in and logged out
 function manageLogInEvents() {
+  myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+  homeBtn.addEventListener('click', goToHomePage);
   signInForm.removeEventListener('submit', handleSignIn);
   myLibraryBtn.removeEventListener('click', openSignInModal);
   registrationForm.removeEventListener('submit', handleRegistration);
@@ -118,16 +134,30 @@ function manageLogInEvents() {
   modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
   modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
   goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
-  signOutBtn.addEventListener('click', handleSignOut);
+  // signOutBtn.addEventListener('click', handleSignOut);
 }
 
 function manageLogOutEvents() {
+  myLibraryBtn.removeEventListener('click', onLibraryBtnClick);
+  homeBtn.removeEventListener('click', goToHomePage);
   registrationForm.addEventListener('submit', handleRegistration);
   signInForm.addEventListener('submit', handleSignIn);
-  signOutBtn.removeEventListener('click', handleSignOut);
+  // signOutBtn.removeEventListener('click', handleSignOut);
   myLibraryBtn.addEventListener('click', openSignInModal);
   modalSignInClose.addEventListener('click', closeSignInModal);
   modalRegistrationOpen.addEventListener('click', openRegistrationModal);
   modalRegistrationClose.addEventListener('click', closeRegistrationModal);
   goToRegistrationBtn.addEventListener('click', openRegistrationModal);
+}
+
+function renderMovieCard(movie) {
+  gallery.innerHTML = movieTmpl(movie);
+}
+
+function goToHomePage() {
+  markupHome();
+  api
+    .fetchMovie()
+    .then(renderMovieCard)
+    .catch(error => console.log(error));
 }

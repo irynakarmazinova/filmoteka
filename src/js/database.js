@@ -11,7 +11,7 @@ import {
   remove,
 } from 'firebase/database';
 import { gallery } from './refs';
-import { emptyLibraryMsg } from './pontify';
+import { emptyLibraryMsg, errorMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
 
 //database settings
@@ -36,9 +36,8 @@ function getMoviesFromDB(userId, movieListType) {
       if (!snapshot.exists()) {
         emptyLibraryMsg();
       } else {
-        const data = Object.values(snapshot.val());
         const movies = {
-          results: [...data[0]],
+          results: [...Object.values(snapshot.val())],
         };
         renderMovies(movies);
       }
