@@ -13,8 +13,10 @@ import './js/fetchFilms';
 import './js/database';
 import './js/auth';
 import './js/modalFilm';
+import './js/fn';
 
 import './js/loadMoreBtn';
 import './js/footer-modal-window';
 
 import './js/modalAuth';
+

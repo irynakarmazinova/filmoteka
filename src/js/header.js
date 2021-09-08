@@ -24,7 +24,7 @@ const api = new API();
 homeBtn.addEventListener('click', onHomeBtnClick);
 myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onLogoClick);
-searchForm.addEventListener('submit', onSearch);
+// searchForm.addEventListener('submit', onSearch);
 
 watchedBtn.addEventListener('submit', onSubmitWatched);
 watchedBtn.addEventListener('click', onSubmitWatched);
@@ -49,46 +49,80 @@ function onLogoClick(e) {
 }
 
 // Запрос на сервер и отрисовка
-function renderMovieCard(movie) {
-  gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
-}
+// function renderMovieCard(movie) {
+//   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
+// }
 
-function onSearch(e) {
-  e.preventDefault();
-  clearMovieCard();
-  api.query = e.currentTarget.elements.query.value;
+// function onSearch(e) {
+//   e.preventDefault();
+//   clearMovieCard();
+//   api.query = e.currentTarget.elements.query.value;
+//   api.resetPage();
+//   api
+//     .fetchSearch()
+//     .then(films => {
+//       renderMovieCard(films);
 
-  if (api.query === ' ') {
-    emptyMovie();
-    loadBtn.classList.add('not-found');
-    return;
-  }
+//       if (films.total_results === 0) {
+//         loadBtn.classList.add('not-found');
+//         return;
+//       }
 
-  api.resetPage();
-  api
-    .fetchSearch()
-    .then(films => {
-      renderMovieCard(films);
+//       if (!loadBtn.classList.contains('not-found')) {
+//         return;
+//       }
 
-      if (films.total_results === 0) {
-        wrongRequest();
-        loadBtn.classList.add('not-found');
-        return;
-      }
+//       loadBtn.classList.remove('not-found');
+//     })
+//     .catch(error => console.log(error));
+//   e.currentTarget.elements.query.value = '';
+// }
 
-      if (!loadBtn.classList.contains('not-found')) {
-        return;
-      }
+// function clearMovieCard() {
+//   gallery.innerHTML = '';
+// }
 
-      loadBtn.classList.remove('not-found');
-    })
-    .catch(error => console.log(error));
-  e.currentTarget.elements.query.value = '';
-}
+// function renderMovieCard(movie) {
+//   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
+// }
 
-function clearMovieCard() {
-  gallery.innerHTML = '';
-}
+// function onSearch(e) {
+//   e.preventDefault();
+//   clearMovieCard();
+//   api.query = e.currentTarget.elements.query.value;
+
+//   if (api.query === ' ') {
+//     emptyMovie();
+//     loadBtn.classList.add('not-found');
+//     return;
+//   }
+
+//   api.resetPage();
+//   api
+//     .fetchSearch()
+//     .then(films => {
+//       renderMovieCard(films);
+
+//       if (films.total_results === 0) {
+//         wrongRequest();
+//         loadBtn.classList.add('not-found');
+//         return;
+//       }
+
+//       if (!loadBtn.classList.contains('not-found')) {
+//         return;
+//       }
+
+//       loadBtn.classList.remove('not-found');
+//     })
+//     .catch(error => console.log(error));
+//   e.currentTarget.elements.query.value = '';
+// }
+
+// function clearMovieCard() {
+//   gallery.innerHTML = '';
+// }
+
 
 function onSubmitWatched(e) {
   e.preventDefault();
