@@ -43,7 +43,6 @@ import {
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
-import { getDatabase } from 'firebase/database';
 
 const api = new API();
 // const database = getDatabase();
@@ -61,7 +60,7 @@ async function handleRegistration(e) {
     await createUserWithEmailAndPassword(auth, email, password);
     successfulRegistrationMsg();
     closeRegistrationModal();
-  } catch {
+  } catch (error) {
     const errorCode = error.code;
     registrationErrorMsg(errorCode.slice(5).replace(/-/g, ' '));
   }
@@ -77,7 +76,7 @@ async function handleSignIn(e) {
     successfulSignInMsg();
     closeSignInModal();
   } catch {
-    authErrorMsg;
+    authErrorMsg();
   }
 }
 
@@ -95,7 +94,7 @@ async function handleSignOut() {
     });
     signOutMsg();
   } catch {
-    errorMsg;
+    errorMsg();
   }
 }
 
@@ -119,7 +118,7 @@ async function handleAuthStateChange() {
       }
     });
   } catch {
-    errorMsg;
+    errorMsg();
   }
 }
 
@@ -160,6 +159,6 @@ async function goToHomePage() {
     const data = await api.fetchMovie();
     const movie = renderMovieCard(data);
   } catch {
-    errorMsg;
+    errorMsg();
   }
 }
