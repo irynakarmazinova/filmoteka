@@ -69,8 +69,8 @@ const onGalleryImgClick = async e => {
   movieDetails.isQueued = false;
 
   if (auth.currentUser) {
-    movieDetails.isWatched = await isMovieInDB(auth.currentUser.uid, 'queueMovies', movieDetails);
-    movieDetails.isQueued = await isMovieInDB(auth.currentUser.uid, 'watchedMovies', movieDetails);
+    movieDetails.isWatched = await isMovieInDB(auth.currentUser.uid, 'watchedMovies', movieDetails);
+    movieDetails.isQueued = await isMovieInDB(auth.currentUser.uid, 'queuedMovies', movieDetails);
   }
 
   const movieModalMarkup = movieModalTpl(movieDetails);
