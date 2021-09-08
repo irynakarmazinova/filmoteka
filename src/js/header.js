@@ -58,7 +58,7 @@ function onSearch(e) {
   clearMovieCard();
   api.query = e.currentTarget.elements.query.value;
 
-  if (api.query === ' ') {
+  if (api.query.trim() === '') {
     emptyMovie();
     loadBtn.classList.add('not-found');
     return;

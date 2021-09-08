@@ -33,19 +33,24 @@
 }
 
 .modal__close-button {
-  display: flex;
-  justify-content: center;
   position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 0;
+  top: 10px;
+  right: 10px;
+
   width: 30px;
   height: 30px;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  background-image: url('../images/close.svg');
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
+
+  transition: transform 300ms ease;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
 }
 
 .modal__close-icon {
