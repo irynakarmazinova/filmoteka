@@ -35,6 +35,7 @@ async function getMoviesFromDB(userId, movieListType) {
 
     if (!snapshot.exists()) {
       emptyLibraryMsg();
+      clearGallery();
     } else {
       const movies = {
         results: [...Object.values(snapshot.val())],
@@ -44,6 +45,10 @@ async function getMoviesFromDB(userId, movieListType) {
   } catch {
     errorMsg();
   }
+}
+
+function clearGallery() {
+  gallery.innerHTML = '';
 }
 
 function renderMovies(data) {
