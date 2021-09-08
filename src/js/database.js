@@ -1,9 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, get, child } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  push,
+  get,
+  child,
+  query,
+  orderByChild,
+  equalTo,
+  remove,
+} from 'firebase/database';
 import { gallery } from './refs';
-import { emptyLibraryMsg } from './pontify';
+import { emptyLibraryMsg, errorMsg } from './pontify';
 import movieTmpl from '../templates/movie-card.hbs';
 
+//database settings
 const firebaseConfig = {
   apiKey: 'AIzaSyD9DuVbKdLwDtku8FtOtjPod4nIuWT1gZ0',
   authDomain: 'filmoteka-7c398.firebaseapp.com',
@@ -17,29 +28,65 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
-function getMoviesFromDB(userId, movieListType) {
-  const dbRef = ref(getDatabase());
-  get(child(dbRef, `users/${userId}/${movieListType}/`))
-    .then(snapshot => {
-      if (!snapshot.exists()) {
-        emptyLibraryMsg();
-      } else {
-        const data = Object.values(snapshot.val());
-        const movies = {
-          results: [...data[0]],
-        };
-        renderMovies(movies);
-      }
-    })
-    .catch(error => errorMsg);
-}
+//rendering movies from watched and queue libraries
+// function getMoviesFromDB(userId, movieListType) {
+//   const dbRef = ref(getDatabase());
+//   get(child(dbRef, `users/${userId}/${movieListType}/`))
+//     .then(snapshot => {
+//       if (!snapshot.exists()) {
+//         emptyLibraryMsg();
+//       } else {
+//         const movies = {
+//           results: [...Object.values(snapshot.val())],
+//         };
+//         renderMovies(movies);
+//       }
+//     })
+//     .catch(error => errorMsg);
+// }
 
-function addUserToDB(userId) {
-  push(ref(database, `users/${userId}`), null).catch(error => errorMsg);
+async function getMoviesFromDB(userId, movieListType) {
+  const dbRef = ref(getDatabase());
+  try {
+    const snapshot = await get(child(dbRef, `users/${userId}/${movieListType}/`));
+
+    if (!snapshot.exists()) {
+      emptyLibraryMsg();
+    } else {
+      const movies = {
+        results: [...Object.values(snapshot.val())],
+      };
+      renderMovies(movies);
+    }
+  } catch {
+    errorMsg;
+  }
 }
 
 function renderMovies(data) {
   gallery.innerHTML = movieTmpl(data);
 }
 
-export { addUserToDB, getMoviesFromDB };
+async function addMovieToDB(userId, movieListType, movie) {
+  await push(ref(database, `users/${userId}/${movieListType}`), movie);
+}
+
+async function removeMovieFromDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  snapshot.forEach(async movieRecord => {
+    await remove(ref(database, `users/${userId}/${movieListType}/${movieRecord.key}`));
+  });
+}
+
+async function isMovieInDB(userId, movieListType, movie) {
+  const snapshot = await get(
+    query(ref(database, `users/${userId}/${movieListType}`), orderByChild('id'), equalTo(movie.id)),
+  );
+
+  return snapshot.size;
+}
+
+export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB };

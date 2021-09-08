@@ -24,7 +24,7 @@
     overflow: hidden;
     margin-left: 30px;
     margin-top: 30px;
-    border-radius: 6px;
+    border-radius: 15px;
     box-shadow: 5px 9px 30px 0 rgb(0 0 0 / 19%);
 
     &:hover {
@@ -41,27 +41,43 @@
   }
 
   &__title {
-    @include font(500, 18px, 20px, 0.03em);
+    @include font(500, 16px, 20px, 0.03em);
     margin-bottom: 10px;
+
+    @media screen and(min-width:1024px) {
+      margin-bottom: 25px;
+    }
   }
+
+  
+  
   &__position {
-    @include font(400, 16px, 20px, 0.03em);
+    @include font(400, 14px, 20px, 0.03em);
     color: $accent-color;
   }
 
   &__modal-close-btn {
     position: absolute;
+    background-color: transparent;
+    background-image: url("/images/close.svg");
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
     right: 10px;
-    top: 10px;
-    cursor: pointer;
-    background: #ffffff;
+    top: 10px;    
     border: none;
+    transition: all 200ms linear;
 
-    &-icon {
-      transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-      &:hover {
-        fill: $accent-color;
-      }
-    }
+    &:hover{      
+      transform: rotate(180deg);
+    } 
+    
   }
+}
+
+.iryna-title{
+  @media screen and(min-width: 1024px) {
+    margin-bottom: 5px;
+  }
+  
 }
