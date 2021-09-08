@@ -53,6 +53,8 @@ const createMovieModal = (markup, movie) => {
   return movieModal;
 };
 
+// import { getAndShowFilmTrailer } from './fn';
+
 const onGalleryImgClick = async e => {
   const target = e.target;
 
@@ -62,6 +64,10 @@ const onGalleryImgClick = async e => {
 
   const movieId = target.dataset.source;
 
+  // console.log(movieId);
+
+  // getAndShowFilmTrailer(movieId);
+
   cardSectionLoader.classList.remove('is-hidden');
 
   const movieDetails = await Api.fetchMovieDetail(movieId);
@@ -69,8 +75,8 @@ const onGalleryImgClick = async e => {
   movieDetails.isQueued = false;
 
   if (auth.currentUser) {
-    movieDetails.isWatched = await isMovieInDB(auth.currentUser.uid, 'queueMovies', movieDetails);
-    movieDetails.isQueued = await isMovieInDB(auth.currentUser.uid, 'watchedMovies', movieDetails);
+    movieDetails.isWatched = await isMovieInDB(auth.currentUser.uid, 'watchedMovies', movieDetails);
+    movieDetails.isQueued = await isMovieInDB(auth.currentUser.uid, 'queuedMovies', movieDetails);
   }
 
   const movieModalMarkup = movieModalTpl(movieDetails);
