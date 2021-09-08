@@ -14,3 +14,4 @@ import './js/footer-modal-window';
 import './js/database';
 import './js/auth';
 import './js/modalFilm';
+import './js/fn';

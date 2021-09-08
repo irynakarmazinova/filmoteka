@@ -31,6 +31,8 @@ const createMovieModal = markup => {
   return movieModal;
 };
 
+// import { getAndShowFilmTrailer } from './fn';
+
 const onGalleryImgClick = async e => {
   const target = e.target;
 
@@ -39,6 +41,10 @@ const onGalleryImgClick = async e => {
   }
 
   const movieId = target.dataset.source;
+
+  // console.log(movieId);
+
+  // getAndShowFilmTrailer(movieId);
 
   cardSectionLoader.classList.remove('is-hidden');
 
