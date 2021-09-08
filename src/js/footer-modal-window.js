@@ -12,12 +12,12 @@ function clickOnCloseModalBtn(e) {
 
 function openModal() {
   window.addEventListener('keydown', onEscPress);
-  backdrop.classList.remove('visually-hidden', 'backdrop-is-hiden');
+  backdrop.classList.remove('visually-hidden', 'team__backdrop-is-hiden');
 }
 
 function closeModal() {
   window.removeEventListener('keydown', onEscPress);
-  backdrop.classList.add('visually-hidden', 'backdrop-is-hiden');
+  backdrop.classList.add('visually-hidden', 'team__backdrop-is-hiden');
 }
 
 function onEscPress(event) {
