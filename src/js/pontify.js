@@ -8,6 +8,8 @@ export {
   errorMsg,
   emptyLibraryMsg,
   registrationErrorMsg,
+  emptyMovie,
+  wrongRequest,
 };
 
 function successfulRegistrationMsg() {
@@ -33,7 +35,7 @@ function signOutMsg() {
 
 function emptyLibraryMsg() {
   info({
-    text: `There are no movies in this library!`,
+    text: `There are no movies in your library!`,
     delay: 2000,
   });
 }
@@ -45,9 +47,9 @@ function authErrorMsg() {
   });
 }
 
-function registrationErrorMsg(error) {
+function registrationErrorMsg(errorMsg) {
   error({
-    text: `${error}!`,
+    text: `${errorMsg}!`,
     delay: 2000,
   });
 }
@@ -55,6 +57,20 @@ function registrationErrorMsg(error) {
 function errorMsg() {
   error({
     text: 'Ooops, something went wrong...',
+    delay: 2000,
+  });
+}
+
+function emptyMovie() {
+  error({
+    text: 'Enter the correct movie name!',
+    delay: 2000,
+  });
+}
+
+function wrongRequest() {
+  error({
+    text: 'Search result not successful. Enter the correct movie name!',
     delay: 2000,
   });
 }

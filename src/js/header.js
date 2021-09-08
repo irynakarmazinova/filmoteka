@@ -1,5 +1,6 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
+import { wrongRequest } from './pontify';
 import {
   searchForm,
   gallery,
@@ -16,6 +17,7 @@ import {
   btnContainerLibrary,
   signOutBtn,
 } from './refs';
+import { emptyMovie } from './pontify';
 
 const api = new API();
 
@@ -80,6 +82,48 @@ function onLogoClick(e) {
 //   gallery.innerHTML = '';
 // }
 
+// function renderMovieCard(movie) {
+//   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
+// }
+
+// function onSearch(e) {
+//   e.preventDefault();
+//   clearMovieCard();
+//   api.query = e.currentTarget.elements.query.value;
+
+//   if (api.query === ' ') {
+//     emptyMovie();
+//     loadBtn.classList.add('not-found');
+//     return;
+//   }
+
+//   api.resetPage();
+//   api
+//     .fetchSearch()
+//     .then(films => {
+//       renderMovieCard(films);
+
+//       if (films.total_results === 0) {
+//         wrongRequest();
+//         loadBtn.classList.add('not-found');
+//         return;
+//       }
+
+//       if (!loadBtn.classList.contains('not-found')) {
+//         return;
+//       }
+
+//       loadBtn.classList.remove('not-found');
+//     })
+//     .catch(error => console.log(error));
+//   e.currentTarget.elements.query.value = '';
+// }
+
+// function clearMovieCard() {
+//   gallery.innerHTML = '';
+// }
+
+
 function onSubmitWatched(e) {
   e.preventDefault();
   addBtnWatchedAccentColor();
@@ -118,3 +162,11 @@ function addBtnQueueAccentColor() {
   queuedBtn.classList.add('accent-color');
   watchedBtn.classList.remove('accent-color');
 }
+
+export {
+  markupMyLibrary,
+  markupHome,
+  onLibraryBtnClick,
+  addBtnQueueAccentColor,
+  addBtnWatchedAccentColor,
+};
