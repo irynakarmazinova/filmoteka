@@ -3,6 +3,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   loadBtn: document.querySelector('.btn'),
   container: document.getElementById('js-container'),
+  errorText: document.querySelector('.error__text'),
 
   logo: document.getElementById('logo'),
   logoImg: document.querySelector('.icon-film'),
@@ -25,6 +26,7 @@ const refs = {
   modalRegistrationClose: document.querySelector('[data-modal-registration-close]'),
   modalRegistration: document.querySelector('[data-modal-registration]'),
   goToRegistrationBtn: document.querySelector('.auth-form__registration-appeal'),
+  signOutIcon: document.querySelector('.sign-out__icon-js'),
 };
 
 export const {
@@ -33,7 +35,8 @@ export const {
   loadBtn,
   container,
   signInForm,
-  logo, logoImg, 
+  logo,
+  logoImg,
   homeBtn,
   myLibraryBtn,
   header,
@@ -53,4 +56,6 @@ export const {
   modalRegistration,
   goToRegistrationBtn,
   registrationForm,
+  errorText,
+  signOutIcon,
 } = refs;

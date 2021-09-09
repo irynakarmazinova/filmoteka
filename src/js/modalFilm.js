@@ -5,6 +5,7 @@ import movieModalTpl from '../templates/movie-modal';
 import { gallery, cardSectionLoader } from './refs';
 import { getAuth } from 'firebase/auth';
 import { addMovieToDB, removeMovieFromDB, isMovieInDB } from './database';
+import { openSignInModal } from './modalAuth';
 
 const Api = new ApiService();
 const auth = getAuth();
@@ -29,6 +30,12 @@ const createMovieModal = (markup, movie) => {
       // handle buttons
       modal.addEventListener('click', async event => {
         if (!event.target.classList.contains('movie-modal__btn')) {
+          return;
+        }
+
+        if (!auth.currentUser) {
+          instance.close();
+          openSignInModal();
           return;
         }
 

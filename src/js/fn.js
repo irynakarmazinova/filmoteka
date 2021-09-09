@@ -1,4 +1,4 @@
-import { searchForm, gallery, cardSectionLoader } from './refs';
+import { searchForm, gallery, loadBtn, errorText, cardSectionLoader } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
 import { emptyMovie, wrongRequest } from './pontify';
@@ -71,11 +71,34 @@ function renderMovieCard(movie) {
 }
 
 // ================== Создаём разметку на основе полученного объекта с фильмами ==================
-function createMarkupFilms() {
+ function createMarkupFilms() {
   getFilmsObj().then(films =>
     getGenresObj()
       .then(genres => parseGenres(films, genres))
       .then(film => {
+        film.map(fil => {
+    
+    if (fil.release_date) {
+           
+        fil.release_date = fil.release_date.slice(0, 4);
+      
+    }
+  })
+    film.map(fil => {
+    
+     if (fil.genre_ids) {
+
+   return fil.genre_ids = fil.genre_ids.slice(0, 2);
+     
+     }
+    });
+       
+        if (film.length == 0) {
+          errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
+        }
+        else {
+          errorText.textContent = '';
+        }
         loadMoreBtn.enable();
         renderMovieCard(film);
       }),
@@ -83,7 +106,7 @@ function createMarkupFilms() {
 }
 
 createMarkupFilms();
-
+export {createMarkupFilms}
 // ================== Функция запроса по submit формы ==================
 function onSearch(e) {
   e.preventDefault();

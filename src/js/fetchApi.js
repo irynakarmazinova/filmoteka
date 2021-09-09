@@ -12,19 +12,26 @@ export default class ApiService {
     this.increment();
     return films;
   }
-  async fetchMovie() {
-    const url = `${BASE_URL}trending/all/day?&api_key=${API_KEY}&page=${this.page}`;
-    const response = await fetch(url);
-    const films = await response.json();
-    this.increment();
-    return films;
-  }
+  // async fetchMovie() {
+  //   const url = `${BASE_URL}trending/all/day?&api_key=${API_KEY}&page=${this.page}`;
+  //   const response = await fetch(url);
+  //   const films = await response.json();
+  //   this.increment();
+  //   return films;
+  // }
   async fetchMovieDetail(id) {
     const url = `${BASE_URL}movie/${id}?api_key=${API_KEY}&language=en-US`;
     const response = await fetch(url);
     const film = await response.json();
     return film;
   }
+        async fetchVideo(id) {
+          const url = `${BASE_URL}movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+         const response = await fetch(url);
+        const film = await response.json();
+        return film.results;
+           
+    }
   increment() {
     this.page += 1;
   }

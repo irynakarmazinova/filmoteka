@@ -17,8 +17,10 @@ import {
   queuedBtn,
   btnContainerLibrary,
   signOutBtn,
+  errorText
 } from './refs';
 import { emptyMovie } from './pontify';
+import { createMarkupFilms } from './fn';
 
 import { createMarkupFilms } from './fn';
 
@@ -71,6 +73,7 @@ function onLogoImgClick(e) {
 //   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 // }
 
+
 // function onSearch(e) {
 //   e.preventDefault();
 //   clearMovieCard();
@@ -98,6 +101,36 @@ function onLogoImgClick(e) {
 //     .catch(error => console.log(error));
 //   e.currentTarget.elements.query.value = '';
 // }
+=======
+// function onSearch(e) {
+//   e.preventDefault();
+//   clearMovieCard();
+//   api.query = e.currentTarget.elements.query.value.trim();
+//   if (api.query === '') {
+//     loadBtn.classList.add('not-found');
+//     return;
+//   }
+//   api.resetPage();
+//   api
+//     .fetchSearch()
+//     .then(films => {
+//       renderMovieCard(films);
+//       if (films.total_results === 0) {
+//         loadBtn.classList.add('not-found');
+//         return
+       
+//       }
+
+//       if (!loadBtn.classList.contains('not-found')) {
+//         return;
+//       }
+
+//       loadBtn.classList.remove('not-found');
+//     })
+//     .catch(error => console.log(error));
+//   e.currentTarget.elements.query.value = '';
+// }
+
 
 // function renderMovieCard(movie) {
 //   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
@@ -173,6 +206,7 @@ function onLogoImgClick(e) {
 //   gallery.innerHTML = '';
 // }
 
+
 // function fetchFilmsDefault() {
 //   api.resetPage();
 //   api.fetchMovie()
@@ -181,7 +215,12 @@ function onLogoImgClick(e) {
 //   renderMovieCard(films);
 //  })
 //  .catch(error => console.log(error));
+
 // }
+
+//   createMarkupFilms();
+// }
+
 
 function onSubmitWatched(e) {
   e.preventDefault();
