@@ -83,7 +83,6 @@ async function handleSignOut() {
     });
     signOutMsg();
     disableBtns();
-    signOutIcon.classList.add('visually-hidden');
   } catch {
     errorMsg();
   }
@@ -106,6 +105,7 @@ async function handleAuthStateChange() {
       } else {
         goToHomePage();
         manageLogOutEvents();
+        signOutIcon.classList.add('visually-hidden');
       }
     });
   } catch {
