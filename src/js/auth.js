@@ -145,11 +145,13 @@ function renderMovieCard(movie) {
   gallery.innerHTML = movieTmpl(movie);
 }
 
+import { createMarkupFilms } from './fn';
 async function goToHomePage() {
   markupHome();
   try {
-    const data = await api.fetchMovie();
-    const movie = renderMovieCard(data);
+    // const data = await api.fetchMovie();
+    // const movie = renderMovieCard(data);
+    // createMarkupFilms();
   } catch {
     errorMsg();
   }
