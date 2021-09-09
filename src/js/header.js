@@ -16,6 +16,7 @@ import {
   queuedBtn,
   btnContainerLibrary,
   signOutBtn,
+  errorText
 } from './refs';
 import { emptyMovie } from './pontify';
 import { createMarkupFilms } from './fn';
@@ -82,7 +83,8 @@ function onSearch(e) {
       renderMovieCard(films);
       if (films.total_results === 0) {
         loadBtn.classList.add('not-found');
-        return;
+        return
+       
       }
 
       if (!loadBtn.classList.contains('not-found')) {

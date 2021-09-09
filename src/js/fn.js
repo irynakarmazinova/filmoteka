@@ -1,4 +1,4 @@
-import { searchForm, gallery } from './refs';
+import { searchForm, gallery, loadBtn, errorText } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
 
@@ -76,7 +76,14 @@ function renderMovieCard(movie) {
    return fil.genre_ids = fil.genre_ids.slice(0, 2);
      
      }
-   });
+    });
+        film.length <= 20 ? loadBtn.classList.add('is-hidden') : loadBtn.classList.remove('is-hidden')
+        if (film.length == 0) {
+          errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
+        }
+        else {
+          errorText.textContent = '';
+        }
         loadMoreBtn.enable();
         renderMovieCard(film);
       }),
