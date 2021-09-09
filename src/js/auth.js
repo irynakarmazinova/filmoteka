@@ -16,6 +16,7 @@ import {
   watchedBtn,
   homeBtn,
   signOutBtn,
+  signOutIcon,
   myLibraryBtn,
   modalSignInClose,
   goToRegistrationBtn,
@@ -37,7 +38,6 @@ import {
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
-import { startAt } from '@firebase/database';
 
 const api = new API();
 const auth = getAuth();
@@ -60,6 +60,7 @@ async function handleRegistration(e) {
   }
 }
 
+//user sign in function
 async function handleSignIn(e) {
   e.preventDefault();
   const email = e.currentTarget.elements.email.value;
@@ -74,6 +75,7 @@ async function handleSignIn(e) {
   }
 }
 
+//user sign out function
 async function handleSignOut() {
   try {
     await signOut(auth, user => {
@@ -81,16 +83,19 @@ async function handleSignOut() {
     });
     signOutMsg();
     disableBtns();
+    signOutIcon.classList.add('visually-hidden');
   } catch {
     errorMsg();
   }
 }
 
+//managing actions when the user is logged in function
 async function handleAuthStateChange() {
   try {
     onAuthStateChanged(auth, user => {
       if (user) {
         const userId = user.uid;
+        signOutIcon.classList.remove('visually-hidden');
         watchedBtn.addEventListener('click', async e => {
           await getMoviesFromDB(userId, 'watchedMovies');
         });
@@ -135,6 +140,7 @@ function manageLogOutEvents() {
   goToRegistrationBtn.addEventListener('click', openRegistrationModal);
 }
 
+//util functions
 function renderMovieCard(movie) {
   gallery.innerHTML = movieTmpl(movie);
 }
