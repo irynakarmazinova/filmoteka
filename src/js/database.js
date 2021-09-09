@@ -37,9 +37,7 @@ async function getMoviesFromDB(userId, movieListType) {
       emptyLibraryMsg();
       clearGallery();
     } else {
-      const movies = {
-        results: [...Object.values(snapshot.val())],
-      };
+      const movies = [...Object.values(snapshot.val())];
       renderMovies(movies);
     }
   } catch {
@@ -77,4 +75,4 @@ async function isMovieInDB(userId, movieListType, movie) {
   return snapshot.size;
 }
 
-export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB };
+export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB, clearGallery };
