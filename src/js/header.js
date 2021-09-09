@@ -9,6 +9,7 @@ import {
   registrationForm,
   signInForm,
   logo,
+  logoImg,
   homeBtn,
   myLibraryBtn,
   header,
@@ -24,7 +25,9 @@ const api = new API();
 homeBtn.addEventListener('click', onHomeBtnClick);
 myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onLogoClick);
-// searchForm.addEventListener('submit', onSearch);
+
+logoImg.addEventListener('click', onLogoImgClick);
+searchForm.addEventListener('submit', onSearch);
 
 watchedBtn.addEventListener('submit', onSubmitWatched);
 watchedBtn.addEventListener('click', onSubmitWatched);
@@ -36,6 +39,7 @@ queuedBtn.addEventListener('click', onSubmitQueue);
 function onHomeBtnClick(e) {
   e.preventDefault();
   markupHome();
+  fetchFilmsDefault();
 }
 
 function onLibraryBtnClick(e) {
@@ -46,9 +50,49 @@ function onLibraryBtnClick(e) {
 function onLogoClick(e) {
   e.preventDefault();
   markupHome();
+  fetchFilmsDefault();
+}
+
+function onLogoImgClick(e) {
+  e.preventDefault();
+  markupHome();
+  fetchFilmsDefault();
 }
 
 // Запрос на сервер и отрисовка
+
+function renderMovieCard(movie) {
+  gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
+}
+
+function onSearch(e) {
+  e.preventDefault();
+  clearMovieCard();
+  api.query = e.currentTarget.elements.query.value.trim();
+  if (api.query === '') {
+    loadBtn.classList.add('not-found');
+    return;
+  }
+  api.resetPage();
+  api
+    .fetchSearch()
+    .then(films => {
+      renderMovieCard(films);
+      if (films.total_results === 0) {
+        loadBtn.classList.add('not-found');
+        return;
+      }
+
+      if (!loadBtn.classList.contains('not-found')) {
+        return;
+      }
+
+      loadBtn.classList.remove('not-found');
+    })
+    .catch(error => console.log(error));
+  e.currentTarget.elements.query.value = '';
+}
+
 // function renderMovieCard(movie) {
 //   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 // }
@@ -122,6 +166,17 @@ function onLogoClick(e) {
 // function clearMovieCard() {
 //   gallery.innerHTML = '';
 // }
+
+function fetchFilmsDefault() {
+  api.resetPage();
+  api
+    .fetchMovie()
+    .then(films => {
+      clearMovieCard();
+      renderMovieCard(films);
+    })
+    .catch(error => console.log(error));
+}
 
 function onSubmitWatched(e) {
   e.preventDefault();

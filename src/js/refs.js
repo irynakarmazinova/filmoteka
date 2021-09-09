@@ -5,6 +5,7 @@ const refs = {
   container: document.getElementById('js-container'),
 
   logo: document.getElementById('logo'),
+  logoImg: document.querySelector('.icon-film'),
   homeBtn: document.querySelector('.menu__link'),
   myLibraryBtn: document.getElementById('my-library'),
   header: document.querySelector('.header'),
@@ -32,7 +33,7 @@ export const {
   loadBtn,
   container,
   signInForm,
-  logo,
+  logo, logoImg, 
   homeBtn,
   myLibraryBtn,
   header,
