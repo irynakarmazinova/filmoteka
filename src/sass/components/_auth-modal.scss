@@ -1,27 +1,25 @@
 .auth-modal {
-  max-width: 450px;
-  width: 100%;
-  max-height: 450px;
-  padding: 40px;
+  width: 100vw;
+  height: 100vh;
+  padding: 140px 40px;
   overflow: hidden;
   transform: scale(1);
   background-color: rgb(253, 249, 241);
   transition: transform 250ms linear;
-
-  @media screen and (max-width: 767px) {
-    margin: 0 auto;
-  }
 
   @media screen and (min-width: 768px) {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
+    max-width: 450px;
+    max-height: 450px;
+    padding: 40px;
   }
 
   @media screen and (min-width: 1024px) {
     max-width: 528px;
-    min-height: 400px;
+    // min-height: 400px;
   }
 
   .backdrop-is-hidden > & {
@@ -33,19 +31,24 @@
 }
 
 .modal__close-button {
-  display: flex;
-  justify-content: center;
   position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 0;
+  top: 10px;
+  right: 10px;
+
   width: 30px;
   height: 30px;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  background-image: url('../images/close.svg');
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
+
+  transition: transform 300ms ease;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
 }
 
 .modal__close-icon {
@@ -72,15 +75,20 @@
   display: flex;
   flex-direction: column;
   padding-bottom: 8px;
-}
 
-.auth-form__field {
-  margin-bottom: 40px;
-}
+  &__field {
+    margin-bottom: 40px;
+  }
 
-.auth-form__wrapper {
-  position: relative;
-  display: block;
+  &__wrapper {
+    position: relative;
+    display: block;
+  }
+
+  &__button {
+    align-self: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .auth-form__input {
@@ -122,12 +130,6 @@
   margin: 10px;
   border: none;
   background-color: transparent;
-}
-
-.auth-form__button {
-  min-width: 200px;
-  align-self: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
 
 .auth-form__registration-appeal {

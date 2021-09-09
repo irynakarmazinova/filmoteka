@@ -8,7 +8,8 @@ import {
   container,
   registrationForm,
   signInForm,
-  logo, logoImg, 
+  logo,
+  logoImg,
   homeBtn,
   myLibraryBtn,
   header,
@@ -59,14 +60,12 @@ function onLogoImgClick(e) {
   markupHome();
   fetchFilmsDefault();
 }
- 
+
 // Запрос на сервер и отрисовка
 
 function renderMovieCard(movie) {
   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 }
-
-
 
 function onSearch(e) {
   e.preventDefault();
@@ -170,7 +169,6 @@ function onSearch(e) {
 // function clearMovieCard() {
 //   gallery.innerHTML = '';
 // }
-
 
 function fetchFilmsDefault() {
 //   api.resetPage();
