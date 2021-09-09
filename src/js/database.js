@@ -28,23 +28,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
-//rendering movies from watched and queue libraries
-// function getMoviesFromDB(userId, movieListType) {
-//   const dbRef = ref(getDatabase());
-//   get(child(dbRef, `users/${userId}/${movieListType}/`))
-//     .then(snapshot => {
-//       if (!snapshot.exists()) {
-//         emptyLibraryMsg();
-//       } else {
-//         const movies = {
-//           results: [...Object.values(snapshot.val())],
-//         };
-//         renderMovies(movies);
-//       }
-//     })
-//     .catch(error => errorMsg);
-// }
-
 async function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
   try {
@@ -52,15 +35,18 @@ async function getMoviesFromDB(userId, movieListType) {
 
     if (!snapshot.exists()) {
       emptyLibraryMsg();
+      clearGallery();
     } else {
-      const movies = {
-        results: [...Object.values(snapshot.val())],
-      };
+      const movies = [...Object.values(snapshot.val())];
       renderMovies(movies);
     }
   } catch {
-    errorMsg;
+    errorMsg();
   }
+}
+
+function clearGallery() {
+  gallery.innerHTML = '';
 }
 
 function renderMovies(data) {
@@ -89,4 +75,4 @@ async function isMovieInDB(userId, movieListType, movie) {
   return snapshot.size;
 }
 
-export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB };
+export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB, clearGallery };

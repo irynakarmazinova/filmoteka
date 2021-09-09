@@ -8,7 +8,8 @@ import {
   container,
   registrationForm,
   signInForm,
-  logo, logoImg, 
+  logo,
+  logoImg,
   homeBtn,
   myLibraryBtn,
   header,
@@ -57,14 +58,12 @@ function onLogoImgClick(e) {
   markupHome();
   fetchFilmsDefault();
 }
- 
+
 // Запрос на сервер и отрисовка
 
 function renderMovieCard(movie) {
   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 }
-
-
 
 function onSearch(e) {
   e.preventDefault();
@@ -168,15 +167,15 @@ function onSearch(e) {
 //   gallery.innerHTML = '';
 // }
 
-
 function fetchFilmsDefault() {
   api.resetPage();
-  api.fetchMovie()
- .then((films) => {
-  clearMovieCard();
-  renderMovieCard(films);
- })
- .catch(error => console.log(error));
+  api
+    .fetchMovie()
+    .then(films => {
+      clearMovieCard();
+      renderMovieCard(films);
+    })
+    .catch(error => console.log(error));
 }
 
 function onSubmitWatched(e) {

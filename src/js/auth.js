@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { getMoviesFromDB } from './database';
+import { getMoviesFromDB, clearGallery } from './database';
 import {
   gallery,
   signInForm,
@@ -30,38 +30,31 @@ import {
   registrationErrorMsg,
   errorMsg,
 } from './pontify';
-import {
-  markupMyLibrary,
-  markupHome,
-  onLibraryBtnClick,
-  addBtnQueueAccentColor,
-  addBtnWatchedAccentColor,
-} from './header';
+import { markupMyLibrary, markupHome } from './header';
 import {
   closeRegistrationModal,
   openSignInModal,
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
-import { getDatabase } from 'firebase/database';
+import { startAt } from '@firebase/database';
 
 const api = new API();
-// const database = getDatabase();
 const auth = getAuth();
 handleAuthStateChange();
 
 //user registration function
 async function handleRegistration(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
+    markupMyLibrary();
     successfulRegistrationMsg();
     closeRegistrationModal();
-  } catch {
+  } catch (error) {
     const errorCode = error.code;
     registrationErrorMsg(errorCode.slice(5).replace(/-/g, ' '));
   }
@@ -69,15 +62,15 @@ async function handleRegistration(e) {
 
 async function handleSignIn(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    markupMyLibrary();
     successfulSignInMsg();
     closeSignInModal();
   } catch {
-    authErrorMsg;
+    authErrorMsg();
   }
 }
 
@@ -85,17 +78,11 @@ async function handleSignOut() {
   try {
     await signOut(auth, user => {
       const userId = user.uid;
-      myLibraryBtn.removeEventListener('click', e => getMoviesFromDB(userId, 'watchedMovies'));
-      watchedBtn.removeEventListener('click', e => {
-        getMoviesFromDB(userId, 'watchedMovies');
-      });
-      queuedBtn.removeEventListener('click', e => {
-        getMoviesFromDB(userId, 'queuedMovies');
-      });
     });
     signOutMsg();
+    disableBtns();
   } catch {
-    errorMsg;
+    errorMsg();
   }
 }
 
@@ -104,13 +91,11 @@ async function handleAuthStateChange() {
     onAuthStateChanged(auth, user => {
       if (user) {
         const userId = user.uid;
-        addBtnWatchedAccentColor();
-        myLibraryBtn.addEventListener('click', e => getMoviesFromDB(userId, 'watchedMovies'));
-        watchedBtn.addEventListener('click', e => {
-          getMoviesFromDB(userId, 'watchedMovies');
+        watchedBtn.addEventListener('click', async e => {
+          await getMoviesFromDB(userId, 'watchedMovies');
         });
-        queuedBtn.addEventListener('click', e => {
-          getMoviesFromDB(userId, 'queuedMovies');
+        queuedBtn.addEventListener('click', async e => {
+          await getMoviesFromDB(userId, 'queuedMovies');
         });
         manageLogInEvents();
       } else {
@@ -119,13 +104,13 @@ async function handleAuthStateChange() {
       }
     });
   } catch {
-    errorMsg;
+    errorMsg();
   }
 }
 
 //functions for managing event listeners as user  is logged in and logged out
 function manageLogInEvents() {
-  myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+  myLibraryBtn.addEventListener('click', markupMyLibrary);
   homeBtn.addEventListener('click', goToHomePage);
   signInForm.removeEventListener('submit', handleSignIn);
   myLibraryBtn.removeEventListener('click', openSignInModal);
@@ -134,15 +119,15 @@ function manageLogInEvents() {
   modalRegistrationOpen.removeEventListener('click', openRegistrationModal);
   modalRegistrationClose.removeEventListener('click', closeRegistrationModal);
   goToRegistrationBtn.removeEventListener('click', openRegistrationModal);
-  // signOutBtn.addEventListener('click', handleSignOut);
+  signOutBtn.addEventListener('click', handleSignOut);
 }
 
 function manageLogOutEvents() {
-  myLibraryBtn.removeEventListener('click', onLibraryBtnClick);
+  myLibraryBtn.removeEventListener('click', markupMyLibrary);
   homeBtn.removeEventListener('click', goToHomePage);
   registrationForm.addEventListener('submit', handleRegistration);
   signInForm.addEventListener('submit', handleSignIn);
-  // signOutBtn.removeEventListener('click', handleSignOut);
+  signOutBtn.removeEventListener('click', handleSignOut);
   myLibraryBtn.addEventListener('click', openSignInModal);
   modalSignInClose.addEventListener('click', closeSignInModal);
   modalRegistrationOpen.addEventListener('click', openRegistrationModal);
@@ -160,6 +145,15 @@ async function goToHomePage() {
     const data = await api.fetchMovie();
     const movie = renderMovieCard(data);
   } catch {
-    errorMsg;
+    errorMsg();
+  }
+}
+
+function disableBtns() {
+  if (watchedBtn.classList.contains('accent-color')) {
+    watchedBtn.classList.remove('accent-color');
+  }
+  if (queuedBtn.classList.contains('accent-color')) {
+    queuedBtn.classList.remove('accent-color');
   }
 }
