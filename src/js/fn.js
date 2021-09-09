@@ -77,7 +77,7 @@ function renderMovieCard(movie) {
      
      }
     });
-        film.length <= 20 ? loadBtn.classList.add('is-hidden') : loadBtn.classList.remove('is-hidden')
+       
         if (film.length == 0) {
           errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
         }
