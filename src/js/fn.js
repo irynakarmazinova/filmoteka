@@ -106,7 +106,7 @@ function renderMovieCard(movie) {
 }
 
 createMarkupFilms();
-export {createMarkupFilms}
+
 // ================== Функция запроса по submit формы ==================
 function onSearch(e) {
   e.preventDefault();
