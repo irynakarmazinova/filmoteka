@@ -101,7 +101,7 @@ function onLogoImgClick(e) {
 //     .catch(error => console.log(error));
 //   e.currentTarget.elements.query.value = '';
 // }
-=======
+
 // function onSearch(e) {
 //   e.preventDefault();
 //   clearMovieCard();
