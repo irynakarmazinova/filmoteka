@@ -3,6 +3,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   loadBtn: document.querySelector('.btn'),
   container: document.getElementById('js-container'),
+  errorText: document.querySelector('.error__text'),
 
   logo: document.getElementById('logo'),
   logoImg: document.querySelector('.icon-film'),
@@ -55,5 +56,6 @@ export const {
   modalRegistration,
   goToRegistrationBtn,
   registrationForm,
+  errorText,
   signOutIcon,
 } = refs;
