@@ -52,12 +52,12 @@ handleAuthStateChange();
 //user registration function
 async function handleRegistration(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
+    markupMyLibrary();
     successfulRegistrationMsg();
     closeRegistrationModal();
   } catch (error) {
@@ -68,11 +68,12 @@ async function handleRegistration(e) {
 
 async function handleSignIn(e) {
   e.preventDefault();
-  markupMyLibrary();
   const email = e.currentTarget.elements.email.value;
   const password = e.currentTarget.elements.password.value;
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    getMoviesFromDB(userId, 'watchedMovies');
+    markupMyLibrary();
     successfulSignInMsg();
     closeSignInModal();
   } catch {
