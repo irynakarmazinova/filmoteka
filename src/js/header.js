@@ -22,7 +22,7 @@ import {
 import { emptyMovie } from './pontify';
 import { createMarkupFilms } from './fn';
 
-import { createMarkupFilms } from './fn';
+
 
 const api = new API();
 
