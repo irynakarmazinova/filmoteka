@@ -15,51 +15,56 @@
     margin-left: -30px;
     margin-bottom: 50px;
   }
-}
-.gallery__item {
-  @media screen and (min-width: 768px) {
-    flex-basis: calc((100% - 2 * 30px) / 2);
-    margin-top: 30px;
-    margin-left: 30px;
-  }
-  @media screen and (min-width: 1024px) {
-    flex-basis: calc((100% - 3 * 30px) / 3);
-  }
-}
-.gallery__item:not(:last-child) {
-  margin-bottom: 20px;
-  @media screen and (min-width: 768px) {
-    margin-bottom: 0;
-  }
-}
-.gallery__image {
-  display: block;
-  border-radius: 5px;
-  height: 398px;
-}
-.gallery__wrap {
-  padding-top: 10px;
-}
-.gallery__title {
-  @include font(500, 12px, 14px, 0em);
-  text-transform: uppercase;
-  @media screen and (min-width: 768px) {
-    @include font(500, 12px, 16px, 0em);
-  }
-}
-.gallery__wrap-advantages {
-  display: flex;
-  @include font(500, 12px, 14px, 0em);
-  color: $accent-color;
-}
 
-.gallery__average {
-  background-color: $accent-color;
-  color: $primary-color;
-  margin-left: 20px;
-  padding: 1px 10px;
-  border-radius: 5px;
-  @media screen and (min-width: 768px) {
-    margin-left: 10px;
+  &__item {
+    @media screen and (min-width: 768px) {
+      flex-basis: calc((100% - 2 * 30px) / 2);
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+    @media screen and (min-width: 1024px) {
+      flex-basis: calc((100% - 3 * 30px) / 3);
+    }
+  }
+  &__item:not(:last-child) {
+    margin-bottom: 20px;
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+  &__image {
+    display: block;
+    border-radius: 5px;
+    height: 398px;
+  }
+  &__wrap {
+    padding-top: 10px;
+  }
+  &__title {
+    @include font(500, 12px, 14px, 0em);
+    text-transform: uppercase;
+    @media screen and (min-width: 768px) {
+      @include font(500, 12px, 16px, 0em);
+    }
+  }
+  &__wrap-advantages {
+    display: flex;
+    @include font(500, 12px, 14px, 0em);
+    color: $accent-color;
+  }
+
+  &__average {
+    background-color: $accent-color;
+    color: $primary-color;
+    margin-left: 20px;
+    padding: 1px 10px;
+    border-radius: 5px;
+    @media screen and (min-width: 768px) {
+      margin-left: 10px;
+    }
+  }
+
+  &__cut:last-child {
+    display: none;
   }
 }

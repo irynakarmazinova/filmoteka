@@ -18,6 +18,7 @@ import {
   signOutBtn,
 } from './refs';
 import { emptyMovie } from './pontify';
+import { createMarkupFilms } from './fn';
 
 const api = new API();
 
@@ -170,13 +171,14 @@ function onSearch(e) {
 
 
 function fetchFilmsDefault() {
-  api.resetPage();
-  api.fetchMovie()
- .then((films) => {
-  clearMovieCard();
-  renderMovieCard(films);
- })
- .catch(error => console.log(error));
+//   api.resetPage();
+//   api.fetchMovie()
+//  .then((films) => {
+//   clearMovieCard();
+//   renderMovieCard(films);
+//  })
+//  .catch(error => console.log(error));
+  createMarkupFilms();
 }
 
 function onSubmitWatched(e) {

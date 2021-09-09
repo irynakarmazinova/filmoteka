@@ -56,11 +56,27 @@ function renderMovieCard(movie) {
 }
 
 // ================== Создаём разметку на основе полученного объекта с фильмами ==================
-function createMarkupFilms() {
+ function createMarkupFilms() {
   getFilmsObj().then(films =>
     getGenresObj()
       .then(genres => parseGenres(films, genres))
       .then(film => {
+        film.map(fil => {
+    
+    if (fil.release_date) {
+           
+        fil.release_date = fil.release_date.slice(0, 4);
+      
+    }
+  })
+    film.map(fil => {
+    
+     if (fil.genre_ids) {
+
+   return fil.genre_ids = fil.genre_ids.slice(0, 2);
+     
+     }
+   });
         loadMoreBtn.enable();
         renderMovieCard(film);
       }),
@@ -68,7 +84,7 @@ function createMarkupFilms() {
 }
 
 createMarkupFilms();
-
+export {createMarkupFilms}
 // ================== Функция запроса по submit формы ==================
 function onSearch(e) {
   e.preventDefault();
