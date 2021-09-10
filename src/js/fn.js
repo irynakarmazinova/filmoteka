@@ -2,7 +2,7 @@ import { searchForm, gallery, loadBtn, errorText, cardSectionLoader } from './re
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
 import { emptyMovie, wrongRequest } from './pontify';
-// import { markupHome } from './header';
+import { markupHome } from './header';
 
 import { API_KEY, BASE_URL } from './constants';
 
@@ -71,32 +71,25 @@ function renderMovieCard(movie) {
 }
 
 // ================== Создаём разметку на основе полученного объекта с фильмами ==================
- function createMarkupFilms() {
+function createMarkupFilms() {
   getFilmsObj().then(films =>
     getGenresObj()
       .then(genres => parseGenres(films, genres))
       .then(film => {
         film.map(fil => {
-    
-    if (fil.release_date) {
-           
-        fil.release_date = fil.release_date.slice(0, 4);
-      
-    }
-  })
-    film.map(fil => {
-    
-     if (fil.genre_ids) {
+          if (fil.release_date) {
+            fil.release_date = fil.release_date.slice(0, 4);
+          }
+        });
+        film.map(fil => {
+          if (fil.genre_ids) {
+            return (fil.genre_ids = fil.genre_ids.slice(0, 2));
+          }
+        });
 
-   return fil.genre_ids = fil.genre_ids.slice(0, 2);
-     
-     }
-    });
-       
         if (film.length == 0) {
           errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
-        }
-        else {
+        } else {
           errorText.textContent = '';
         }
         loadMoreBtn.enable();
@@ -144,6 +137,16 @@ function onClick(e) {
   createMarkupFilms();
 }
 
+// ================== Функция обработчик для возвращения на домашнюю страницу ==================
+function onHomeClick(e) {
+  e.preventDefault();
+  markupHome();
+  clearMovieCard();
+
+  varInputValue = '';
+  createMarkupFilms();
+}
+
 // ================== Функция получения и отрисовки трейлера к фильму ==================
 const idFilm = 385128;
 function getAndShowFilmTrailer(idFilm) {
@@ -167,5 +170,4 @@ function getAndShowFilmTrailer(idFilm) {
   allowfullscreen
 ></iframe>; */
 
-export { getAndShowFilmTrailer, createMarkupFilms, loadMoreBtn };
-
+export { getAndShowFilmTrailer, createMarkupFilms, loadMoreBtn, onHomeClick };

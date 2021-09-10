@@ -17,20 +17,18 @@ import {
   queuedBtn,
   btnContainerLibrary,
   signOutBtn,
-  errorText
+  errorText,
 } from './refs';
 import { emptyMovie } from './pontify';
-import { createMarkupFilms } from './fn';
-
-
+import { createMarkupFilms, onHomeClick } from './fn';
 
 const api = new API();
 
-homeBtn.addEventListener('click', onHomeBtnClick);
+homeBtn.addEventListener('click', onHomeClick);
 myLibraryBtn.addEventListener('click', onLibraryBtnClick);
-logo.addEventListener('click', onLogoClick);
+logo.addEventListener('click', onHomeClick);
 
-logoImg.addEventListener('click', onLogoImgClick);
+logoImg.addEventListener('click', onHomeClick);
 // searchForm.addEventListener('submit', onSearch);
 
 watchedBtn.addEventListener('submit', onSubmitWatched);
@@ -40,39 +38,42 @@ queuedBtn.addEventListener('submit', onSubmitQueue);
 queuedBtn.addEventListener('click', onSubmitQueue);
 
 // Функции вызова отрисовки разметки по нажатию на кнопки
-function onHomeBtnClick(e) {
-  e.preventDefault();
-  markupHome();
-  // fetchFilmsDefault();
-}
+// function onHomeBtnClick(e) {
+//   e.preventDefault();
+//   markupHome();
+
+// fetchFilmsDefault();
+// }
 
 function onLibraryBtnClick(e) {
   e.preventDefault();
   markupMyLibrary();
 }
 
-function onLogoClick(e) {
-  e.preventDefault();
-  markupHome();
+// function onLogoClick(e) {
+//   e.preventDefault();
+//   markupHome();
 
-  createMarkupFilms();
-  // fetchFilmsDefault();
-  // createMarkupFilms();
-}
+//   clearMovieCard();
+//   createMarkupFilms();
+// fetchFilmsDefault();
+// createMarkupFilms();
+// }
 
-function onLogoImgClick(e) {
-  e.preventDefault();
-  markupHome();
-  // fetchFilmsDefault();
-  // createMarkupFilms();
-}
+// function onLogoImgClick(e) {
+//   e.preventDefault();
+//   markupHome();
+// fetchFilmsDefault();
+
+//   clearMovieCard();
+//   createMarkupFilms();
+// }
 
 // Запрос на сервер и отрисовка
 
 // function renderMovieCard(movie) {
 //   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
 // }
-
 
 // function onSearch(e) {
 //   e.preventDefault();
@@ -118,7 +119,7 @@ function onLogoImgClick(e) {
 //       if (films.total_results === 0) {
 //         loadBtn.classList.add('not-found');
 //         return
-       
+
 //       }
 
 //       if (!loadBtn.classList.contains('not-found')) {
@@ -130,7 +131,6 @@ function onLogoImgClick(e) {
 //     .catch(error => console.log(error));
 //   e.currentTarget.elements.query.value = '';
 // }
-
 
 // function renderMovieCard(movie) {
 //   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
@@ -206,7 +206,6 @@ function onLogoImgClick(e) {
 //   gallery.innerHTML = '';
 // }
 
-
 // function fetchFilmsDefault() {
 //   api.resetPage();
 //   api.fetchMovie()
@@ -220,7 +219,6 @@ function onLogoImgClick(e) {
 
 //   createMarkupFilms();
 // }
-
 
 function onSubmitWatched(e) {
   e.preventDefault();
