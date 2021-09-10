@@ -167,4 +167,5 @@ function getAndShowFilmTrailer(idFilm) {
   allowfullscreen
 ></iframe>; */
 
-export { getAndShowFilmTrailer, createMarkupFilms };
+export { getAndShowFilmTrailer, createMarkupFilms, loadMoreBtn };
+
