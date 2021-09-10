@@ -49,6 +49,7 @@ function onHomeBtnClick(e) {
 function onLibraryBtnClick(e) {
   e.preventDefault();
   markupMyLibrary();
+  errorText.textContent = '';
 }
 
 function onLogoClick(e) {
