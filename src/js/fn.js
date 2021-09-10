@@ -1,7 +1,7 @@
 import { searchForm, gallery, loadBtn, errorText, cardSectionLoader } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
-import { emptyMovie, wrongRequest } from './pontify';
+import { notEnterSearchQuery, emptyMovie, wrongRequest } from './pontify';
 import { markupHome } from './header';
 
 import { API_KEY, BASE_URL } from './constants';
@@ -87,11 +87,13 @@ function createMarkupFilms() {
           }
         });
 
-        if (film.length == 0) {
-          errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
-        } else {
-          errorText.textContent = '';
+        if (film.length === 0) {
+          gallery.innerHTML = `<div class="notice">
+          <span>Search result not successful. Enter the correct movie name</span>
+          <img class="img-smile" src="https://i.pinimg.com/474x/f4/b7/f7/f4b7f707d9750650763e42ad4a5156b9.jpg" alt="smile">
+          </div>`;
         }
+        if (film.length)
         loadMoreBtn.enable();
         renderMovieCard(film);
       }),
@@ -109,8 +111,11 @@ function onSearch(e) {
   page = 1;
 
   if (varInputValue === '') {
-    emptyMovie();
+    notEnterSearchQuery();
     loadMoreBtn.hide();
+    gallery.innerHTML = `<div class="notice"><span>You haven't entered anything. Please enter your search request</span>
+    <img class="img-smile" src="https://i.pinimg.com/736x/27/2f/13/272f1363f910dbcd1bc274b38a650407--smiley-faces-emoji.jpg" alt="smile"
+    </div>`;
     return;
   }
 

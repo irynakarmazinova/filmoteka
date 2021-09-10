@@ -1,20 +1,8 @@
 .header__container {
   height: 230px;
-  width: 100%;
+  // width: 100%;
   margin: 0 auto;
   background: rgba(0, 0, 0, 0.56);
-
-  @media screen and (max-width: 767px) {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 100%;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 100vw;
-  }
 }
 
 .header {
@@ -24,7 +12,6 @@
   background-image: url('../images/mobile/rectangle@1x.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  // background-position: center;
   margin: 0 auto;
 
   @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
@@ -262,12 +249,12 @@
   }
 }
 
-
 .notice {
   @include font(700, 20px, 16px, 0em);
   text-align: center;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 30px;
+  color: #ff001b;
 }
 
 .error__text {
@@ -277,4 +264,10 @@
   @include font(400, 14px, 16px, 0em);
   text-align: center;
   color: #ff001b;
+}
+
+.img-smile {
+  width: 200px;
+  margin: 0 auto;
+  padding-top: 35px;
 }
