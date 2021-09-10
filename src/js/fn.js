@@ -56,11 +56,11 @@ function parseGenres(array, genres) {
     ...el,
     genre_ids: el.genre_ids.length
       ? [
-          ...genres.reduce(
-            (acc, { id, name }) => (el.genre_ids.includes(+id) ? [...acc, name] : acc),
-            [],
-          ),
-        ]
+        ...genres.reduce(
+          (acc, { id, name }) => (el.genre_ids.includes(+id) ? [...acc, name] : acc),
+          [],
+        ),
+      ]
       : ['Жанры отсутствуют'],
   }));
 }

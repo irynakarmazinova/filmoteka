@@ -16,7 +16,7 @@ import {
   watchedBtn,
   queuedBtn,
   btnContainerLibrary,
-  signOutBtn, 
+  signOutBtn,
   signOutContainer,
   errorText,
 } from './refs';
@@ -41,12 +41,12 @@ queuedBtn.addEventListener('submit', onSubmitQueue);
 queuedBtn.addEventListener('click', onSubmitQueue);
 
 // Функции вызова отрисовки разметки по нажатию на кнопки
-// function onHomeBtnClick(e) {
-//   e.preventDefault();
-//   markupHome();
+function onHomeBtnClick(e) {
+  e.preventDefault();
+  markupHome();
 
-// fetchFilmsDefault();
-// }
+  fetchFilmsDefault();
+}
 
 
 // function onLibraryBtnClick(e) {
@@ -141,7 +141,7 @@ function onLibraryBtnClick(e) {
 //       if (!loadBtn.classList.contains('not-found')) {
 //         return;
 //       }
-  // End last version))
+// End last version))
 
 //       loadBtn.classList.remove('not-found');
 //     })
