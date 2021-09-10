@@ -1,11 +1,18 @@
-import { searchForm, gallery } from './refs';
+import { searchForm, gallery, loadBtn, errorText, cardSectionLoader } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
+import { emptyMovie, wrongRequest } from './pontify';
+// import { markupHome } from './header';
 
 import { API_KEY, BASE_URL } from './constants';
 
 let varInputValue = '';
 let page = 1;
+
+const loadMoreBtn = new LoadMoreBtn({
+  selector: '[data-action="load-more"]',
+  hidden: false,
+});
 
 // ================== Функция для создания URL ==================
 function createUrl(inputValue, pageNumber) {
@@ -25,6 +32,14 @@ async function fetchFn(url) {
 async function getFilmsObj() {
   const filmsObj = await fetchFn(createUrl(varInputValue, page));
   const { results } = filmsObj;
+
+  if (results.length === 0) {
+    wrongRequest();
+    loadMoreBtn.hide();
+  } else {
+    loadMoreBtn.show();
+  }
+
   return results;
 }
 
@@ -56,11 +71,34 @@ function renderMovieCard(movie) {
 }
 
 // ================== Создаём разметку на основе полученного объекта с фильмами ==================
-function createMarkupFilms() {
+ function createMarkupFilms() {
   getFilmsObj().then(films =>
     getGenresObj()
       .then(genres => parseGenres(films, genres))
       .then(film => {
+        film.map(fil => {
+    
+    if (fil.release_date) {
+           
+        fil.release_date = fil.release_date.slice(0, 4);
+      
+    }
+  })
+    film.map(fil => {
+    
+     if (fil.genre_ids) {
+
+   return fil.genre_ids = fil.genre_ids.slice(0, 2);
+     
+     }
+    });
+       
+        if (film.length == 0) {
+          errorText.textContent = 'Search result not successful. Enter the correct movie name and ';
+        }
+        else {
+          errorText.textContent = '';
+        }
         loadMoreBtn.enable();
         renderMovieCard(film);
       }),
@@ -77,6 +115,12 @@ function onSearch(e) {
   varInputValue = e.currentTarget.elements.query.value.trim();
   page = 1;
 
+  if (varInputValue === '') {
+    emptyMovie();
+    loadMoreBtn.hide();
+    return;
+  }
+
   createMarkupFilms();
   e.currentTarget.elements.query.value = '';
 }
@@ -89,10 +133,6 @@ function clearMovieCard() {
 }
 
 // ================== Функция загрузить ещё ==================
-const loadMoreBtn = new LoadMoreBtn({
-  selector: '[data-action="load-more"]',
-  hidden: false,
-});
 
 loadMoreBtn.refs.button.addEventListener('click', onClick);
 
@@ -127,4 +167,5 @@ function getAndShowFilmTrailer(idFilm) {
   allowfullscreen
 ></iframe>; */
 
-export { getAndShowFilmTrailer, loadMoreBtn };
+export { getAndShowFilmTrailer, createMarkupFilms, loadMoreBtn };
+
