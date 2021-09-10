@@ -48,10 +48,18 @@ queuedBtn.addEventListener('click', onSubmitQueue);
 // fetchFilmsDefault();
 // }
 
+
 // function onLibraryBtnClick(e) {
 //   e.preventDefault();
 //   markupMyLibrary();
 // }
+
+function onLibraryBtnClick(e) {
+  e.preventDefault();
+  markupMyLibrary();
+  errorText.textContent = '';
+}
+
 
 // function onLogoClick(e) {
 //   e.preventDefault();

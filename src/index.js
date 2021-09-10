@@ -19,4 +19,5 @@ import './js/loadMoreBtn';
 import './js/footer-modal-window';
 
 import './js/modalAuth';
+import './js/btn-Up';
 
