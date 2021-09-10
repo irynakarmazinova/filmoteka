@@ -1,0 +1,27 @@
+{{! Шаблон одной карточки }}
+{{#each this}}
+  <li class='gallery__item'>
+    <div class='gallery__card'>
+      <img
+        class='gallery__image'
+        src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+        alt='{{original_title}}'
+        data-source='{{id}}'
+      />
+      <div class='gallery__wrap'>
+        <p class='gallery__title'>{{title}}{{name}}</p>
+        <div class='gallery__wrap-advantages'>
+          <p class='gallery__action'>
+            <span>
+              {{#each genres}}
+                {{this.name}}<span class='gallery__cut'>,</span>
+              {{/each}}
+            </span>
+            |
+            {{release_date}}</p>
+          <p class='gallery__average'>{{vote_average}}</p>
+        </div>
+      </div>
+    </div>
+  </li>
+{{/each}}

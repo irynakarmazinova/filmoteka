@@ -12,7 +12,8 @@ import {
 } from 'firebase/database';
 import { gallery } from './refs';
 import { emptyLibraryMsg, errorMsg } from './pontify';
-import movieTmpl from '../templates/movie-card.hbs';
+import movieTmpl from '../templates/movie-card-my-library.hbs';
+import { loadMoreBtn } from './fn';
 
 //database settings
 const firebaseConfig = {
@@ -37,9 +38,22 @@ async function getMoviesFromDB(userId, movieListType) {
     if (!snapshot.exists()) {
       emptyLibraryMsg();
       clearGallery();
+      loadMoreBtn.hide();
     } else {
       const movies = [...Object.values(snapshot.val())];
+      const moviesArr = movies.reduce((acc, movie) => {
+        if (movie.genres) {
+          movie.genres = movie.genres.slice(0, 2);
+        }
+        acc.push(movie);
+        return acc;
+      }, []);
+
       renderMovies(movies);
+      loadMoreBtn.show();
+      if (movies.length < 10) {
+        loadMoreBtn.hide();
+      }
     }
   } catch {
     errorMsg();
