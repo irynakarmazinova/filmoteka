@@ -1,15 +1,3 @@
-@keyframes emergence {
-  from {
-    background-color: rgba(0, 0, 0, 0.1);
-    opacity: 0;
-  }
-
-  to {
-    background-color: rgba(235, 235, 235, 0.1);
-    opacity: 0.5;
-  }
-}
-
 .header__container {
   height: 230px;
   width: 100%;
@@ -144,11 +132,7 @@
 
 .wrapper__exit {
   @include flex-center;
-  transform: translate(38px, -61px);
-
-  @media screen and (min-width: 768px) {
-    transform: translate(104px, -56px);
-  }
+  transform: translate(33px, -61px);
 }
 
 .exit-icon {
@@ -276,6 +260,14 @@
       background-image: url('../images/desktop/library/rectangle@2x.jpg');
     }
   }
+}
+
+
+.notice {
+  @include font(700, 20px, 16px, 0em);
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 40px;
 }
 
 .error__text {

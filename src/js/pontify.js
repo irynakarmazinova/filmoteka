@@ -6,7 +6,8 @@ export {
   signOutMsg,
   successfulSignInMsg,
   errorMsg,
-  emptyLibraryMsg,
+  emptyLibraryMsg, 
+  notEnterSearchQuery, 
   registrationErrorMsg,
   emptyMovie,
   wrongRequest,
@@ -61,12 +62,21 @@ function errorMsg() {
   });
 }
 
+
+function notEnterSearchQuery() {
+  notice({
+    text: 'Please enter your request parameters!',
+    delay: 2000,
+  });
+}
+
 function emptyMovie() {
   error({
     text: 'Enter the correct movie name!',
     delay: 2000,
   });
 }
+
 
 function wrongRequest() {
   error({

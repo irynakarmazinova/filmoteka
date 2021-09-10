@@ -1,6 +1,6 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
-import { wrongRequest } from './pontify';
+import { notEnterSearchQuery, wrongRequest } from './pontify';
 import {
   searchForm,
   gallery,
@@ -16,7 +16,8 @@ import {
   watchedBtn,
   queuedBtn,
   btnContainerLibrary,
-  signOutBtn,
+  signOutBtn, 
+  signOutContainer,
   errorText,
 } from './refs';
 import { emptyMovie } from './pontify';
@@ -24,10 +25,12 @@ import { createMarkupFilms, onHomeClick } from './fn';
 
 const api = new API();
 
+homeBtn.addEventListener('click', onHomeBtnClick);
+// myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+// logo.addEventListener('click', onLogoClick);
+// logoImg.addEventListener('click', onLogoImgClick);
 homeBtn.addEventListener('click', onHomeClick);
-myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onHomeClick);
-
 logoImg.addEventListener('click', onHomeClick);
 // searchForm.addEventListener('submit', onSearch);
 
@@ -45,11 +48,18 @@ queuedBtn.addEventListener('click', onSubmitQueue);
 // fetchFilmsDefault();
 // }
 
+
+// function onLibraryBtnClick(e) {
+//   e.preventDefault();
+//   markupMyLibrary();
+// }
+
 function onLibraryBtnClick(e) {
   e.preventDefault();
   markupMyLibrary();
   errorText.textContent = '';
 }
+
 
 // function onLogoClick(e) {
 //   e.preventDefault();
@@ -94,9 +104,44 @@ function onLibraryBtnClick(e) {
 //         return;
 //       }
 
+
+// Last version VP
+// function onSearch(e) {
+//   e.preventDefault();
+//   clearMovieCard();
+//   api.query = e.currentTarget.elements.query.value.trim();
+//   if (api.query === '') {
+//     loadBtn.classList.add('not-found');
+//     notEnterSearchQuery();
+//     gallery.innerHTML = `<div class="notice">You haven't entered anything. Please enter your search request</div>`;
+//     return;
+//   }
+//   api.resetPage();
+//   api
+//     .fetchSearch()
+//     .then(films => {
+//       renderMovieCard(films);
+//       if (films.total_results === 0) {
+//         loadBtn.classList.add('not-found');
+//         wrongRequest();
+//         gallery.innerHTML = `<div class="notice">You entered an incorrect request. Try again!</div>`;
+//         return;
+//       }
+
 //       if (!loadBtn.classList.contains('not-found')) {
 //         return;
 //       }
+
+//       loadBtn.classList.remove('not-found');
+//     })
+//     .catch(error => console.log(error));
+//   e.currentTarget.elements.query.value = '';
+// }
+// =======
+//       if (!loadBtn.classList.contains('not-found')) {
+//         return;
+//       }
+  // End last version))
 
 //       loadBtn.classList.remove('not-found');
 //     })
