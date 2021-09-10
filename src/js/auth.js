@@ -1,5 +1,4 @@
 import API from './fetchApi';
-import movieTmpl from '../templates/movie-card.hbs';
 import {
   getAuth,
   onAuthStateChanged,
@@ -7,9 +6,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { getMoviesFromDB, clearGallery } from './database';
+import { getMoviesFromDB } from './database';
 import {
-  gallery,
   signInForm,
   registrationForm,
   queuedBtn,
@@ -38,7 +36,6 @@ import {
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
-import { loadMoreBtn } from './fn';
 
 const api = new API();
 const auth = getAuth();
@@ -84,6 +81,7 @@ async function handleSignOut() {
     });
     signOutMsg();
     disableBtns();
+    markupHome();
   } catch {
     errorMsg();
   }
@@ -94,19 +92,16 @@ async function handleAuthStateChange() {
   try {
     onAuthStateChanged(auth, user => {
       if (user) {
-        loadMoreBtn.hide();
         const userId = user.uid;
         signOutIcon.classList.remove('visually-hidden');
-        watchedBtn.addEventListener('click', async e => {
-          await getMoviesFromDB(userId, 'watchedMovies');
+        watchedBtn.addEventListener('click', e => {
+          getMoviesFromDB(userId, 'watchedMovies');
         });
-        queuedBtn.addEventListener('click', async e => {
-          await getMoviesFromDB(userId, 'queuedMovies');
+        queuedBtn.addEventListener('click', e => {
+          getMoviesFromDB(userId, 'queuedMovies');
         });
         manageLogInEvents();
       } else {
-        loadMoreBtn.show();
-        goToHomePage();
         manageLogOutEvents();
         signOutIcon.classList.add('visually-hidden');
       }
@@ -119,7 +114,7 @@ async function handleAuthStateChange() {
 //functions for managing event listeners as user  is logged in and logged out
 function manageLogInEvents() {
   myLibraryBtn.addEventListener('click', markupMyLibrary);
-  homeBtn.addEventListener('click', goToHomePage);
+  homeBtn.addEventListener('click', disableBtns);
   signInForm.removeEventListener('submit', handleSignIn);
   myLibraryBtn.removeEventListener('click', openSignInModal);
   registrationForm.removeEventListener('submit', handleRegistration);
@@ -132,7 +127,7 @@ function manageLogInEvents() {
 
 function manageLogOutEvents() {
   myLibraryBtn.removeEventListener('click', markupMyLibrary);
-  homeBtn.removeEventListener('click', goToHomePage);
+  homeBtn.removeEventListener('click', disableBtns);
   registrationForm.addEventListener('submit', handleRegistration);
   signInForm.addEventListener('submit', handleSignIn);
   signOutBtn.removeEventListener('click', handleSignOut);
@@ -141,23 +136,6 @@ function manageLogOutEvents() {
   modalRegistrationOpen.addEventListener('click', openRegistrationModal);
   modalRegistrationClose.addEventListener('click', closeRegistrationModal);
   goToRegistrationBtn.addEventListener('click', openRegistrationModal);
-}
-
-//util functions
-function renderMovieCard(movie) {
-  gallery.innerHTML = movieTmpl(movie);
-}
-
-import { createMarkupFilms } from './fn';
-async function goToHomePage() {
-  markupHome();
-  try {
-    // const data = await api.fetchMovie();
-    // const movie = renderMovieCard(data);
-    // createMarkupFilms();
-  } catch {
-    errorMsg();
-  }
 }
 
 function disableBtns() {
