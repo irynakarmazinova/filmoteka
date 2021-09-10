@@ -38,6 +38,7 @@ import {
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
+import { loadMoreBtn } from './fn';
 
 const api = new API();
 const auth = getAuth();
@@ -93,6 +94,7 @@ async function handleAuthStateChange() {
   try {
     onAuthStateChanged(auth, user => {
       if (user) {
+        loadMoreBtn.hide();
         const userId = user.uid;
         signOutIcon.classList.remove('visually-hidden');
         watchedBtn.addEventListener('click', async e => {
@@ -103,6 +105,7 @@ async function handleAuthStateChange() {
         });
         manageLogInEvents();
       } else {
+        loadMoreBtn.show();
         goToHomePage();
         manageLogOutEvents();
         signOutIcon.classList.add('visually-hidden');

@@ -28,6 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
+//fetching and rendering movies from db
 async function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
   try {

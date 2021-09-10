@@ -127,4 +127,4 @@ function getAndShowFilmTrailer(idFilm) {
   allowfullscreen
 ></iframe>; */
 
-export { getAndShowFilmTrailer };
+export { getAndShowFilmTrailer, loadMoreBtn };
