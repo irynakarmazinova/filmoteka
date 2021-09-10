@@ -18,9 +18,11 @@
     height: 30px;
     width: 30px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    
 
-    &:focus,
+
+    &:focus{
+      outline: 0;
+    }
     &:hover {
       transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
       background-color: $accent-color;     
@@ -33,7 +35,9 @@
     width: 20px;
     height: 20px;
 
-    .social-links__link:focus &,
+    .social-links__link:focus &{
+      outline: 0;
+    }
     .social-links__link:hover & {     
       fill: $primary-color;
     }
