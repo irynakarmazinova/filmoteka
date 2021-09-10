@@ -149,13 +149,12 @@ function onHomeClick(e) {
 
 // ================== Функция получения и отрисовки трейлера к фильму ==================
 const idFilm = 385128;
-function getAndShowFilmTrailer(idFilm) {
+function getTrailerLink(idFilm) {
   const urlKeyTrailer = `${BASE_URL}movie/${idFilm}/videos?&api_key=${API_KEY}`;
 
-  fetchFn(urlKeyTrailer).then(({ results }) => {
+  return fetchFn(urlKeyTrailer).then(({ results }) => {
     const keyArrFilms = results.map(({ key }) => key);
-    console.log(keyArrFilms[0]);
-    // iframe.src = `https://www.youtube.com/embed/${keyArrFilms[0]}`;
+    return `https://www.youtube.com/embed/${keyArrFilms[0]}`;
   });
 }
 
@@ -170,4 +169,4 @@ function getAndShowFilmTrailer(idFilm) {
   allowfullscreen
 ></iframe>; */
 
-export { getAndShowFilmTrailer, createMarkupFilms, loadMoreBtn, onHomeClick };
+export { getTrailerLink, createMarkupFilms, loadMoreBtn, onHomeClick };

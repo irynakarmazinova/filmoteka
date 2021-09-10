@@ -45,13 +45,16 @@
       </div>
       <div class='movie-modal__buttons'>
         <button data-type='watchedMovies' data-action='{{#if isWatched}}remove{{else}}add{{/if}}'
-          class='movie-modal__btn movie-modal__btn--orange'>
+          class='movie-modal__btn {{#if isWatched}}movie-modal__btn--active{{/if}} movie-modal__btn--orange'>
           {{#if isWatched}}remove from{{else}}add to{{/if}} watched
         </button>
-        <button data-type='queuedMovies' data-action='{{#if isQueued}}remove{{else}}add{{/if}}'
-          class='movie-modal__btn movie-modal__btn--transparent'>
+        <button 
+          data-type='queuedMovies' 
+          data-action='{{#if isQueued}}remove{{else}}add{{/if}}'
+          class='movie-modal__btn {{#if isQueued}}movie-modal__btn--active{{/if}} movie-modal__btn--transparent'>
           {{#if isQueued}}remove from{{else}}add to{{/if}} queue
         </button>
+        <button class="movie-modal__btn" data-action="show-trailer">Trailer</button>
       </div>
     </div>
   </div>
