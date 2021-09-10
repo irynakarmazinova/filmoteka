@@ -7,7 +7,7 @@ export {
   successfulSignInMsg,
   errorMsg,
   emptyLibraryMsg,
-  registrationErrorMsg,
+  registrationErrorMsg, notEnterSearchQuery, wrongRequest
 };
 
 function successfulRegistrationMsg() {
@@ -55,6 +55,21 @@ function registrationErrorMsg(error) {
 function errorMsg() {
   error({
     text: 'Ooops, something went wrong...',
+    delay: 2000,
+  });
+}
+
+function notEnterSearchQuery() {
+  notice({
+    text: 'Please enter your request parameters!',
+    delay: 2000,
+  });
+}
+
+
+function wrongRequest() {
+  error({
+    text: 'Invalid request. Try again!',
     delay: 2000,
   });
 }

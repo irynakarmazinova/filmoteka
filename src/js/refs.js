@@ -19,6 +19,7 @@ const refs = {
   modalCloseBtn: document.querySelector('.team__modal-close-btn'),
   footerLink: document.getElementById('footer__link'),
   cardSectionLoader: document.getElementById('cardSectionLoader'),
+  signOutContainer: document.getElementById('sign-out'),
 };
 
 export const {
@@ -39,5 +40,5 @@ export const {
   backdrop,
   modalCloseBtn,
   footerLink,
-  cardSectionLoader,
+  cardSectionLoader, signOutContainer
 } = refs;

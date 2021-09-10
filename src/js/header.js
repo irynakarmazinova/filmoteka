@@ -1,5 +1,6 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
+import { notEnterSearchQuery, wrongRequest } from './pontify';
 import {
   searchForm,
   gallery,
@@ -14,13 +15,13 @@ import {
   watchedBtn,
   queuedBtn,
   btnContainerLibrary,
-  signOutBtn,
+  signOutBtn, signOutContainer
 } from './refs';
 
 const api = new API();
 
 homeBtn.addEventListener('click', onHomeBtnClick);
-myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+// myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 logo.addEventListener('click', onLogoClick);
 logoImg.addEventListener('click', onLogoImgClick);
 searchForm.addEventListener('submit', onSearch);
@@ -38,10 +39,10 @@ function onHomeBtnClick(e) {
   fetchFilmsDefault();
 }
 
-function onLibraryBtnClick(e) {
-  e.preventDefault();
-  markupMyLibrary();
-}
+// function onLibraryBtnClick(e) {
+//   e.preventDefault();
+//   markupMyLibrary();
+// }
 
 function onLogoClick(e) {
   e.preventDefault();
@@ -68,6 +69,8 @@ function onSearch(e) {
   api.query = e.currentTarget.elements.query.value.trim();
   if (api.query === '') {
     loadBtn.classList.add('not-found');
+    notEnterSearchQuery();
+    gallery.innerHTML = `<div class="notice">You haven't entered anything. Please enter your search request</div>`;
     return;
   }
   api.resetPage();
@@ -77,6 +80,8 @@ function onSearch(e) {
       renderMovieCard(films);
       if (films.total_results === 0) {
         loadBtn.classList.add('not-found');
+        wrongRequest();
+        gallery.innerHTML = `<div class="notice">You entered an incorrect request. Try again!</div>`;
         return;
       }
 
