@@ -30,3 +30,26 @@
     display: none;
   }
 }
+
+//_____кнопка вверх_________
+.to-up {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  border-radius: 50%;
+  height: 28px;
+  @include flex-center;
+  display: none;
+  z-index: 0;
+  cursor: pointer;
+}
+.to-up:hover {
+  background-color: $accent-color;
+}
+
+.icon {
+  fill: $accent-color;
+}
+.icon:hover {
+  fill: $primary-color;
+}

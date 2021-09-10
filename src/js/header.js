@@ -48,6 +48,7 @@ queuedBtn.addEventListener('click', onSubmitQueue);
 function onLibraryBtnClick(e) {
   e.preventDefault();
   markupMyLibrary();
+  errorText.textContent = '';
 }
 
 // function onLogoClick(e) {
