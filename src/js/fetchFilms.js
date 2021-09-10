@@ -1,14 +1,14 @@
-import API from './fetchApi';
-import movieTmpl from '../templates/movie-card.hbs';
-import { gallery } from './refs';
+// import API from './fetchApi';
+// import movieTmpl from '../templates/movie-card.hbs';
+// import { gallery } from './refs';
 
-const api = new API();
+// const api = new API();
 
-api
-  .fetchMovie()
-  .then(renderMovieCard)
-  .catch(error => console.log(error));
+// api
+//   .fetchMovie()
+//   .then(renderMovieCard)
+//   .catch(error => console.log(error));
 
-export default function renderMovieCard(movie) {
-  gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
-}
+// export default function renderMovieCard(movie) {
+//   gallery.insertAdjacentHTML('beforeend', movieTmpl(movie));
+// }

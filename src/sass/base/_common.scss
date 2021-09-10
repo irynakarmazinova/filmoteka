@@ -54,5 +54,22 @@ button {
 }
 
 .is-hidden {
-  display: none;
+  display: none !important;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: var(--backdrop-overlay);
+
+  overflow-y: scroll;
+  opacity: 1;
+  transition: visibility 250ms var(--primary-cubic), opacity 250ms var(--primary-cubic),
+    pointer-events 250ms var(--primary-cubic);
 }

@@ -6,8 +6,11 @@ export {
   signOutMsg,
   successfulSignInMsg,
   errorMsg,
-  emptyLibraryMsg,
-  registrationErrorMsg, notEnterSearchQuery, wrongRequest
+  emptyLibraryMsg, 
+  notEnterSearchQuery, 
+  registrationErrorMsg,
+  emptyMovie,
+  wrongRequest,
 };
 
 function successfulRegistrationMsg() {
@@ -33,7 +36,7 @@ function signOutMsg() {
 
 function emptyLibraryMsg() {
   info({
-    text: `There are no movies in this library!`,
+    text: `There are no movies in your library!`,
     delay: 2000,
   });
 }
@@ -45,9 +48,9 @@ function authErrorMsg() {
   });
 }
 
-function registrationErrorMsg(error) {
+function registrationErrorMsg(errorMsg) {
   error({
-    text: `${error}!`,
+    text: `${errorMsg}!`,
     delay: 2000,
   });
 }
@@ -59,6 +62,7 @@ function errorMsg() {
   });
 }
 
+
 function notEnterSearchQuery() {
   notice({
     text: 'Please enter your request parameters!',
@@ -66,10 +70,17 @@ function notEnterSearchQuery() {
   });
 }
 
+function emptyMovie() {
+  error({
+    text: 'Enter the correct movie name!',
+    delay: 2000,
+  });
+}
+
 
 function wrongRequest() {
   error({
-    text: 'Invalid request. Try again!',
+    text: 'Search result not successful. Enter the correct movie name!',
     delay: 2000,
   });
 }
