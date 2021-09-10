@@ -2,9 +2,9 @@ import * as basicLightbox from 'basiclightbox';
 import '../../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import ApiService from './fetchApi';
 import movieModalTpl from '../templates/movie-modal';
-import { gallery, cardSectionLoader } from './refs';
+import { gallery, cardSectionLoader, myLibraryBtn } from './refs';
 import { getAuth } from 'firebase/auth';
-import { addMovieToDB, removeMovieFromDB, isMovieInDB } from './database';
+import { addMovieToDB, removeMovieFromDB, isMovieInDB, getMoviesFromDB } from './database';
 import { openSignInModal } from './modalAuth';
 import createTrailerModal from './createTrailerModal';
 
@@ -32,12 +32,12 @@ const createMovieModal = (markup, movie) => {
       modal.addEventListener('click', async event => {
         if (!event.target.classList.contains('movie-modal__btn')) {
           return;
-        } 
+        }
 
         const button = event.target;
 
-        switch(button.dataset.action) {
-          case 'add': 
+        switch (button.dataset.action) {
+          case 'add':
             if (!auth.currentUser) {
               instance.close();
               openSignInModal();
@@ -46,16 +46,24 @@ const createMovieModal = (markup, movie) => {
             await addMovieToDB(auth.currentUser.uid, button.dataset.type, movie);
             button.dataset.action = 'remove';
             button.textContent = button.textContent.replace('add to', 'remove from');
-            break;  
-          case 'remove': 
+            button.classList.add('movie-modal__btn--active');
+            if (myLibraryBtn.classList.contains('current')) {
+              getMoviesFromDB(auth.currentUser.uid, button.dataset.type);
+            }
+            break;
+          case 'remove':
             if (!auth.currentUser) {
               instance.close();
               openSignInModal();
               return;
-            }  
+            }
             await removeMovieFromDB(auth.currentUser.uid, button.dataset.type, movie);
             button.dataset.action = 'add';
-            button.textContent = button.textContent.replace('remove from', 'add to');  
+            button.textContent = button.textContent.replace('remove from', 'add to');
+            button.classList.remove('movie-modal__btn--active');
+            if (myLibraryBtn.classList.contains('current')) {
+              getMoviesFromDB(auth.currentUser.uid, button.dataset.type);
+            }
             break;
         }
       });
@@ -96,11 +104,11 @@ const onGalleryImgClick = async e => {
   movieModal.show();
 
   const showTrailerBtnRef = document.querySelector('[data-action="show-trailer"]');
-  showTrailerBtnRef.addEventListener('click', (e) => {
+  showTrailerBtnRef.addEventListener('click', e => {
     createTrailerModal(movieId);
     movieModal.close();
   });
-  
+
   cardSectionLoader.classList.add('is-hidden');
 };
 
