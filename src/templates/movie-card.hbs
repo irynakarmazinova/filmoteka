@@ -1,27 +1,30 @@
 {{! Шаблон одной карточки }}
 {{#each this}}
-  <li class='gallery__item'>
-    <div class='gallery__card'>
-      <img
-        class='gallery__image'
-        src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
-        alt='{{original_title}}'
-        data-source='{{id}}'
-      />
-      <div class='gallery__wrap'>
-        <p class='gallery__title'>{{title}}{{name}}</p>
-        <div class='gallery__wrap-advantages'>
-          <p class='gallery__action'>
-            <span>
-              {{#each genre_ids}}
-                {{this}}<span class='gallery__cut'>,</span>
-              {{/each}}
-            </span>
-            |
-            {{release_date}}</p>
-          <p class='gallery__average'>{{vote_average}}</p>
-        </div>
+<li class='gallery__item'>
+  <div class='gallery__card'>
+    {{#if poster_path}}
+    <img class='gallery__image' src='https://image.tmdb.org/t/p/w500/{{poster_path}}' alt='{{original_title}}'
+      data-source='{{id}}' />
+    {{else}}
+    <img class='gallery__image'
+      src='https://raw.githubusercontent.com/irynakarmazinova/filmoteka/main/src/images/coming-soon.jpg'
+      alt=' {{original_title}}' />
+    {{/if}}
+    <div class='gallery__wrap'>
+      <p class='gallery__title'>{{title}}{{name}}</p>
+      <div class='gallery__wrap-advantages'>
+        <p class='gallery__action'>
+          <span>
+            {{#each genre_ids}}
+            {{this}}<span class='gallery__cut'>,</span>
+            {{/each}}
+          </span>
+          |
+          {{release_date}}
+        </p>
+        <p class='gallery__average'>{{vote_average}}</p>
       </div>
     </div>
-  </li>
+  </div>
+</li>
 {{/each}}

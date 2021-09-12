@@ -94,7 +94,7 @@ function createMarkupFilms() {
           </div>`;
         }
         if (film.length)
-        loadMoreBtn.enable();
+          loadMoreBtn.enable();
         renderMovieCard(film);
       }),
   );

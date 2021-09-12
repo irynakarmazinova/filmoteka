@@ -3,7 +3,12 @@
     <button class='movie-modal__btn-close js-modal-close' aria-label='close'>
     </button>
     <div class='movie-modal__img-wrapper'>
+      {{#if poster_path}}
       <img src='https://image.tmdb.org/t/p/w200{{poster_path}}' alt='{{title}}' class='movie-modal__img' />
+      {{else}}
+      <img src='https://raw.githubusercontent.com/irynakarmazinova/filmoteka/main/src/images/coming-soon.jpg'
+        alt='{{title}}' class='movie-modal__img' />
+      {{/if}}
     </div>
     <div class='movie-modal__info'>
       <h2 class='movie-modal__title'>{{title}}</h2>
@@ -48,9 +53,7 @@
           class='movie-modal__btn {{#if isWatched}}movie-modal__btn--active{{/if}} movie-modal__btn--orange'>
           {{#if isWatched}}remove from{{else}}add to{{/if}} watched
         </button>
-        <button 
-          data-type='queuedMovies' 
-          data-action='{{#if isQueued}}remove{{else}}add{{/if}}'
+        <button data-type='queuedMovies' data-action='{{#if isQueued}}remove{{else}}add{{/if}}'
           class='movie-modal__btn {{#if isQueued}}movie-modal__btn--active{{/if}} movie-modal__btn--transparent'>
           {{#if isQueued}}remove from{{else}}add to{{/if}} queue
         </button>
