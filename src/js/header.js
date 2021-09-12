@@ -21,14 +21,16 @@ import {
   errorText,
 } from './refs';
 import { emptyMovie } from './pontify';
-import { createMarkupFilms, onHomeClick } from './fn';
+import { clearMovieCard, onHomeClick, loadMoreBtn, onSearch } from './fn';
 
 const api = new API();
 
-homeBtn.addEventListener('click', onHomeBtnClick);
+myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 homeBtn.addEventListener('click', onHomeClick);
 logo.addEventListener('click', onHomeClick);
 logoImg.addEventListener('click', onHomeClick);
+
+searchForm.addEventListener('submit', onSearch);
 
 watchedBtn.addEventListener('submit', onSubmitWatched);
 watchedBtn.addEventListener('click', onSubmitWatched);
@@ -37,16 +39,19 @@ queuedBtn.addEventListener('submit', onSubmitQueue);
 queuedBtn.addEventListener('click', onSubmitQueue);
 
 // Функции вызова отрисовки разметки по нажатию на кнопки
-function onHomeBtnClick(e) {
-  e.preventDefault();
-  markupHome();
+// function onHomeBtnClick(e) {
+//   e.preventDefault();
+//   markupHome();
 
-  fetchFilmsDefault();
-}
+//   fetchFilmsDefault();
+// }
 
 function onLibraryBtnClick(e) {
   e.preventDefault();
   markupMyLibrary();
+
+  loadMoreBtn.hide();
+  clearMovieCard();
   errorText.textContent = '';
 }
 
