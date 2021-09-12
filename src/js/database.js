@@ -13,7 +13,6 @@ import {
 import { gallery } from './refs';
 import { emptyLibraryMsg, errorMsg } from './pontify';
 import movieTmpl from '../templates/movie-card-my-library.hbs';
-import { loadMoreBtn } from './fn';
 
 //database settings
 const firebaseConfig = {
@@ -29,7 +28,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
 
-//fetching and rendering movies from db
+//fetching and rendering movies from db (watched/queued)
 async function getMoviesFromDB(userId, movieListType) {
   const dbRef = ref(getDatabase());
   try {
@@ -38,34 +37,13 @@ async function getMoviesFromDB(userId, movieListType) {
     if (!snapshot.exists()) {
       emptyLibraryMsg();
       clearGallery();
-      loadMoreBtn.hide();
     } else {
-      const movies = [...Object.values(snapshot.val())];
-      const moviesArr = movies.reduce((acc, movie) => {
-        if (movie.genres) {
-          movie.genres = movie.genres.slice(0, 2);
-        }
-        acc.push(movie);
-        return acc;
-      }, []);
-
+      const movies = getMoviesArr(snapshot);
       renderMovies(movies);
-      loadMoreBtn.show();
-      if (movies.length < 10) {
-        loadMoreBtn.hide();
-      }
     }
   } catch {
     errorMsg();
   }
-}
-
-function clearGallery() {
-  gallery.innerHTML = '';
-}
-
-function renderMovies(data) {
-  gallery.innerHTML = movieTmpl(data);
 }
 
 async function addMovieToDB(userId, movieListType, movie) {
@@ -88,6 +66,28 @@ async function isMovieInDB(userId, movieListType, movie) {
   );
 
   return snapshot.size;
+}
+
+//util functions
+function getMoviesArr(snapshot) {
+  const movies = [...Object.values(snapshot.val())];
+  const moviesArr = movies.reduce((acc, movie) => {
+    if (movie.genres) {
+      movie.genres = movie.genres.slice(0, 2);
+    }
+    acc.push(movie);
+    return acc;
+  }, []);
+
+  return moviesArr;
+}
+
+function clearGallery() {
+  gallery.innerHTML = '';
+}
+
+function renderMovies(data) {
+  gallery.innerHTML = movieTmpl(data);
 }
 
 export { getMoviesFromDB, addMovieToDB, removeMovieFromDB, isMovieInDB, clearGallery };

@@ -20,6 +20,7 @@ import {
   goToRegistrationBtn,
   modalRegistrationOpen,
   modalRegistrationClose,
+  myLibNavButtons,
 } from './refs';
 import {
   successfulRegistrationMsg,
@@ -36,6 +37,7 @@ import {
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
+import { loadMoreBtn } from './fn';
 
 const api = new API();
 const auth = getAuth();
@@ -93,17 +95,19 @@ async function handleAuthStateChange() {
     onAuthStateChanged(auth, user => {
       if (user) {
         const userId = user.uid;
-        signOutIcon.classList.remove('visually-hidden');
-        watchedBtn.addEventListener('click', e => {
-          getMoviesFromDB(userId, 'watchedMovies');
-        });
-        queuedBtn.addEventListener('click', e => {
-          getMoviesFromDB(userId, 'queuedMovies');
-        });
+        showSignOutIcon();
         manageLogInEvents();
+
+        myLibNavButtons.addEventListener('click', e => {
+          loadMoreBtn.hide();
+          if (e.target.nodeName !== 'BUTTON') {
+            return;
+          }
+          getMoviesFromDB(userId, `${e.target.dataset.type}Movies`);
+        });
       } else {
         manageLogOutEvents();
-        signOutIcon.classList.add('visually-hidden');
+        hideSignOutIcon();
       }
     });
   } catch {
@@ -145,4 +149,12 @@ function disableBtns() {
   if (queuedBtn.classList.contains('accent-color')) {
     queuedBtn.classList.remove('accent-color');
   }
+}
+
+function hideSignOutIcon() {
+  signOutIcon.classList.add('visually-hidden');
+}
+
+function showSignOutIcon() {
+  signOutIcon.classList.remove('visually-hidden');
 }
