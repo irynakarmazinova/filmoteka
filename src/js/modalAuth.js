@@ -20,7 +20,7 @@ function closeSignInModal() {
 
 function openRegistrationModal() {
   modalRegistration.classList.remove('auth__backdrop-is-hidden');
-  modalSignIn.classList.add('backdrop-is-hidden');
+  modalSignIn.classList.add('auth__backdrop-is-hidden');
   window.addEventListener('click', e => {
     if (e.target.classList.contains('auth__backdrop')) {
       closeRegistrationModal();

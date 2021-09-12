@@ -28,6 +28,7 @@ const refs = {
   modalRegistration: document.querySelector('[data-modal-registration]'),
   goToRegistrationBtn: document.querySelector('.auth-form__registration-appeal'),
   signOutIcon: document.querySelector('.sign-out__icon-js'),
+  myLibNavButtons: document.querySelector('.btn-list'),
 };
 
 export const {
@@ -47,7 +48,7 @@ export const {
   signOutBtn,
   backdrop,
   modalCloseBtn,
-  footerLink, 
+  footerLink,
   signOutContainer,
   cardSectionLoader,
   modalSignInOpen,
@@ -60,4 +61,5 @@ export const {
   registrationForm,
   errorText,
   signOutIcon,
+  myLibNavButtons,
 } = refs;
