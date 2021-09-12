@@ -14,10 +14,10 @@ import './js/database';
 import './js/auth';
 import './js/modalFilm';
 import './js/fn';
+import './js/dark-theme';
 
 import './js/loadMoreBtn';
 import './js/footer-modal-window';
 
 import './js/modalAuth';
 import './js/btn-Up';
-
