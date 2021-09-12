@@ -213,8 +213,10 @@
 
       color: $primary-color;
     }
-    &:hover,
     &:focus{
+      outline: 0px;
+    }
+    &:hover{
        background-color: $accent-color;
         color: $primary-color;
         border: unset;
