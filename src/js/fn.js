@@ -1,7 +1,7 @@
-import { searchForm, gallery, loadBtn, errorText, cardSectionLoader } from './refs';
+import { gallery } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
-import { notEnterSearchQuery, emptyMovie, wrongRequest } from './pontify';
+import { notEnterSearchQuery, wrongRequest } from './pontify';
 import { markupHome } from './header';
 
 import { API_KEY, BASE_URL } from './constants';
@@ -13,6 +13,10 @@ const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: false,
 });
+
+createMarkupFilms();
+
+loadMoreBtn.refs.button.addEventListener('click', onClick);
 
 // ================== Функция для создания URL ==================
 function createUrl(inputValue, pageNumber) {
@@ -56,11 +60,11 @@ function parseGenres(array, genres) {
     ...el,
     genre_ids: el.genre_ids.length
       ? [
-        ...genres.reduce(
-          (acc, { id, name }) => (el.genre_ids.includes(+id) ? [...acc, name] : acc),
-          [],
-        ),
-      ]
+          ...genres.reduce(
+            (acc, { id, name }) => (el.genre_ids.includes(+id) ? [...acc, name] : acc),
+            [],
+          ),
+        ]
       : ['Жанры отсутствуют'],
   }));
 }
@@ -93,14 +97,11 @@ function createMarkupFilms() {
           <img class="img-smile" src="https://i.pinimg.com/474x/f4/b7/f7/f4b7f707d9750650763e42ad4a5156b9.jpg" alt="smile">
           </div>`;
         }
-        if (film.length)
-        loadMoreBtn.enable();
+        if (film.length) loadMoreBtn.enable();
         renderMovieCard(film);
       }),
   );
 }
-
-createMarkupFilms();
 
 // ================== Функция запроса по submit формы ==================
 function onSearch(e) {
@@ -123,17 +124,12 @@ function onSearch(e) {
   e.currentTarget.elements.query.value = '';
 }
 
-searchForm.addEventListener('submit', onSearch);
-
 // ================== Функция очистки поля с  карточками ==================
 function clearMovieCard() {
   gallery.innerHTML = '';
 }
 
 // ================== Функция загрузить ещё ==================
-
-loadMoreBtn.refs.button.addEventListener('click', onClick);
-
 function onClick(e) {
   e.preventDefault();
   page += 1;
@@ -153,7 +149,6 @@ function onHomeClick(e) {
 }
 
 // ================== Функция получения и отрисовки трейлера к фильму ==================
-const idFilm = 385128;
 function getTrailerLink(idFilm) {
   const urlKeyTrailer = `${BASE_URL}movie/${idFilm}/videos?&api_key=${API_KEY}`;
 
@@ -163,15 +158,4 @@ function getTrailerLink(idFilm) {
   });
 }
 
-/* <iframe
-  id="iframe"
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/Cl2Z_iog0cM"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
-></iframe>; */
-
-export { getTrailerLink, createMarkupFilms, loadMoreBtn, onHomeClick };
+export { getTrailerLink, createMarkupFilms, loadMoreBtn, onHomeClick, clearMovieCard, onSearch };
