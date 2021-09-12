@@ -97,7 +97,9 @@ function createMarkupFilms() {
           <img class="img-smile" src="https://i.pinimg.com/474x/f4/b7/f7/f4b7f707d9750650763e42ad4a5156b9.jpg" alt="smile">
           </div>`;
         }
+
         if (film.length) loadMoreBtn.enable();
+
         renderMovieCard(film);
       }),
   );
