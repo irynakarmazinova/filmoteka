@@ -35,13 +35,18 @@
 .to-up {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  right: 8px;
   border-radius: 50%;
   height: 28px;
   @include flex-center;
   display: none;
   z-index: 0;
   cursor: pointer;
+   @media screen and (min-width:768px) {
+     bottom: 28px;
+  right: 28px;
+
+   }
 }
 .to-up:hover {
   background-color: $accent-color;
