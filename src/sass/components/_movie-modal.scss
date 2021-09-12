@@ -2,49 +2,57 @@
   overflow-y: scroll;
 
   &__placeholder {
-    height: 100%;
+       height: 100%;
+      @media screen and (min-width: 768px) {
+        height:unset;
+      }
   }
 }
 
 .movie-modal {
-  padding: 20px;
-
+   padding: 20px;
+      overflow: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
   &__btn-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-
-    width: 30px;
-    height: 30px;
+    top: 18px;
+    right: 18px;
+    width: 14px;
+    height: 14px;
     border: none;
     background-color: transparent;
     background-image: url('../images/close.svg');
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: center;
-
     transition: transform 300ms ease;
 
     &:hover {
       transform: rotate(180deg);
     }
+      &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+}
   }
 
   &__wrapper {
     position: relative;
-
-    max-width: 618px;
-    padding: 48px 20px 20px;
+    max-width: 280px;
+    padding: 48px 20px 41px;
     border-radius: 5px;
     background-color: $primary-color;
 
     @media screen and (min-width: 768px) {
       display: flex;
+      max-width: 618px;
       padding: 40px 30px;
     }
-
     @media screen and (min-width: 1024px) {
       max-width: 882px;
+      padding: 50px 30px 40px;
+   
     }
   }
 
@@ -58,7 +66,7 @@
     margin-bottom: 30px;
     border-radius: 5px;
 
-    overflow: hidden;
+    // overflow: hidden;
 
     @media screen and (min-width: 768px) {
       flex-basis: calc(50% - 15px);
@@ -68,9 +76,15 @@
   }
 
   &__img {
-    max-width: 396px;
-    width: 100%;
-    height: auto;
+    width: 240px;
+    @media screen and (min-width: 768px) {
+      width: 264px;
+      height: 374px;
+    }
+    @media screen and (min-width: 1024px) {
+      width: 396px;
+      height: auto;
+    }
   }
 
   &__info {
@@ -79,12 +93,11 @@
 
   &__title {
     margin-bottom: 20px;
-
     font-weight: 500;
     font-size: 20px;
     line-height: 1.15;
     color: $secondary-color;
-
+    text-transform: uppercase;
     @media screen and (min-width: 1024px) {
       font-size: 30px;
     }
@@ -138,13 +151,30 @@
   }
 
   &__desc {
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     margin-bottom: 21px;
 
     font-weight: 500;
     font-size: 12px;
     line-height: 1.67;
     color: $secondary-color;
+    width: 240;
+    height: 236px;
+     @media screen and (min-width:768px) {
+       width: 264px;
+      height: 236px;
+    }
+    @media screen and (min-width:1024px) {
+      width: 396px;
+      height: 160px;
+    }
   }
+  &__desc::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+}
 
   &__desc-label {
     margin-bottom: 10px;
@@ -155,7 +185,6 @@
 
   &__buttons {
     display: flex;
-    margin-right: -5px;
   }
 
   &__btn {
@@ -164,7 +193,6 @@
     align-items: center;
     max-width: 136px;
     min-height: 44px;
-    margin-right: 5px;
     flex-basis: calc(50% - 7.5px);
     padding: 8px;
     border: 1px solid $secondary-color;
@@ -176,7 +204,7 @@
     line-height: 1.33;
     text-transform: uppercase;
     color: $secondary-color;
-
+    transition: color 250ms linear, background-color 250ms linear;
     &--active {
       margin-right: 15px;
       border: none;
@@ -185,5 +213,16 @@
 
       color: $primary-color;
     }
+    &:hover,
+    &:focus{
+       background-color: $accent-color;
+        color: $primary-color;
+        border: unset;
+
+    }
+    &:not(:last-child){
+      margin-right: 5px;
+    }
   }
 }
+

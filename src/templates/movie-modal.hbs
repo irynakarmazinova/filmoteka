@@ -2,9 +2,9 @@
   <div class='movie-modal__wrapper'>
     <button class='movie-modal__btn-close js-modal-close' aria-label='close'>
     </button>
-    <div class='movie-modal__img-wrapper'>
+    <div class='movie-modal__img-wrapper '>
       {{#if poster_path}}
-      <img src='https://image.tmdb.org/t/p/w200{{poster_path}}' alt='{{title}}' class='movie-modal__img' />
+      <img src='https://image.tmdb.org/t/p/w500/{{poster_path}}' alt='{{title}}' class='movie-modal__img' />
       {{else}}
       <img src='https://raw.githubusercontent.com/irynakarmazinova/filmoteka/main/src/images/coming-soon.jpg'
         alt='{{title}}' class='movie-modal__img' />
