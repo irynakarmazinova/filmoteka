@@ -29,6 +29,8 @@ const refs = {
   goToRegistrationBtn: document.querySelector('.auth-form__registration-appeal'),
   signOutIcon: document.querySelector('.sign-out__icon-js'),
   myLibNavButtons: document.querySelector('.btn-list'),
+  darkThemeBtn: document.querySelector('.menu__link-theme-btn'),
+  darkThemeIcon: document.querySelector('.dark-theme-icon'),
 };
 
 export const {
@@ -62,4 +64,6 @@ export const {
   errorText,
   signOutIcon,
   myLibNavButtons,
+  darkThemeBtn,
+  darkThemeIcon,
 } = refs;
