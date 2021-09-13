@@ -67,11 +67,17 @@ transition: all 250ms;
     .movie-modal__characteristic-label{
        color: $accent-color;
     }
+
+    .menu__link-theme-btn{     
+        background: url("/images/moon.svg");
+        background-size: contain;        
+    }
 }
 
 .wrapper{
     position: relative;
 }
+
 
 .dark-theme-wrapper{
     position: absolute;
@@ -84,18 +90,11 @@ transition: all 250ms;
 
     @media screen and(max-width: 767px) {
         left: 76.4%;
+        bottom: -35%;
     }
+ 
+
 }
 
-.menu__link-theme-btn{  
-  background: transparent;
-  padding: 0;
-  border: none;
 
-  &-icon{
-    fill: $primary-color;
-    display: block;
-    transition: all 250ms;      
-  }
-}
 
