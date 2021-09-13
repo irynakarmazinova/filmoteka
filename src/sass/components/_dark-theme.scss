@@ -5,11 +5,7 @@ transition: all 250ms;
 
 .dark-theme{
     background: rgba(0,0,0,0.9);
-
-    .team-modal{
-        background-color: rgba(254,253,227, 0.8);;
-        box-shadow: 0 0 30px $accent-color;
-    }
+    
 
     .movie-modal{
         background-color: black;
@@ -32,8 +28,19 @@ transition: all 250ms;
         transition: all 250ms; 
     }
 
-    .movie-modal__wrapper,
+    .team-modal{
+        background-color: black;   
+         box-shadow: 0 0 30px $accent-color;
+         padding: 0;     
+    }
+
     .team-modal__vrapper{
+        background-color: rgba(254,253,227, 0.8);
+        padding: 40px;
+    }
+
+    .movie-modal__wrapper
+    {
         background-color:  rgba(254,253,227, 0.8);
         box-shadow: 0 0 30px $accent-color;
     }
@@ -58,7 +65,7 @@ transition: all 250ms;
     
 
     .movie-modal__characteristic-label{
-       color: $primary-color;
+       color: $accent-color;
     }
 }
 
@@ -91,3 +98,4 @@ transition: all 250ms;
     transition: all 250ms;      
   }
 }
+
