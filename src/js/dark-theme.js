@@ -1,10 +1,8 @@
-const darkThemeBtn = document.querySelector('.menu__link-theme-btn');
+import { darkThemeBtn, darkThemeIcon } from './refs';
 
-console.log(darkThemeBtn);
 darkThemeBtn.addEventListener('click', onDarkThemeBtnCkick);
 
-const currentTheme = localStorage.getItem('dark-mode');
-
+console.log(darkThemeIcon);
 darkThemeCheck();
 
 function onDarkThemeBtnCkick() {
