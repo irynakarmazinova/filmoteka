@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { getMoviesFromDB } from './database';
+import { getMoviesFromDB, loadMoreBtnMyLib, showMoreMovies } from './database';
 import {
   signInForm,
   registrationForm,
@@ -42,6 +42,7 @@ import { loadMoreBtn, createMarkupFilms, clearMovieCard } from './fn';
 const api = new API();
 const auth = getAuth();
 handleAuthStateChange();
+let startMovieId = '';
 
 //user registration function
 async function handleRegistration(e) {
@@ -68,7 +69,7 @@ async function handleSignIn(e) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     const userId = auth.currentUser.uid;
-    getMoviesFromDB(userId, 'watchedMovies');
+    startMovieId = await getMoviesFromDB(userId, 'watchedMovies');
     loadMoreBtn.hide();
     addBtnWatchedAccentColor();
     markupMyLibrary();
@@ -91,24 +92,32 @@ async function handleSignOut() {
 }
 
 //managing actions when the user is logged in function
+
 async function handleAuthStateChange() {
   try {
     onAuthStateChanged(auth, user => {
       if (user) {
+        let currentMovieLibrary = 'watchedMovies';
         const userId = user.uid;
+
         showSignOutIcon();
         manageLogInEvents();
 
-        myLibraryBtn.addEventListener('click', e => {
-          openMyLib(userId, 'watchedMovies');
+        myLibraryBtn.addEventListener('click', async e => {
+          startMovieId = await openMyLib(userId, 'watchedMovies');
         });
 
-        myLibNavButtons.addEventListener('click', e => {
+        myLibNavButtons.addEventListener('click', async e => {
           loadMoreBtn.hide();
           if (e.target.nodeName !== 'BUTTON') {
             return;
           }
-          getMoviesFromDB(userId, `${e.target.dataset.type}Movies`);
+          startMovieId = await getMoviesFromDB(userId, `${e.target.dataset.type}Movies`);
+          currentMovieLibrary = `${e.target.dataset.type}Movies`;
+        });
+
+        loadMoreBtnMyLib.refs.button.addEventListener('click', async e => {
+          startMovieId = await showMoreMovies(userId, currentMovieLibrary, startMovieId);
         });
       } else {
         manageLogOutEvents();
@@ -146,6 +155,7 @@ function manageLogOutEvents() {
 }
 
 function disableBtns() {
+  loadMoreBtnMyLib.hide();
   if (watchedBtn.classList.contains('accent-color')) {
     watchedBtn.classList.remove('accent-color');
   }
@@ -166,11 +176,12 @@ async function openMyLib(id, movieListType) {
   if (signOutIcon.classList.contains('visually-hidden')) {
     return;
   }
-  await getMoviesFromDB(id, movieListType);
+  let startId = await getMoviesFromDB(id, movieListType);
   document.getElementById('searchQuery').value = '';
   loadMoreBtn.hide();
   markupMyLibrary();
   addBtnWatchedAccentColor();
+  return startId;
 }
 
 function handleSignOutEvents() {
