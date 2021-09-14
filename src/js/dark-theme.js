@@ -2,7 +2,6 @@ import { darkThemeBtn, darkThemeIcon } from './refs';
 
 darkThemeBtn.addEventListener('click', onDarkThemeBtnCkick);
 
-console.log(darkThemeIcon);
 darkThemeCheck();
 
 function onDarkThemeBtnCkick() {

@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding: 140px 40px;
+  border-radius: 5px;
   overflow: hidden;
   transform: scale(1);
   background-color: rgb(253, 249, 241);
@@ -24,6 +25,7 @@
 
   .auth__backdrop-is-hidden > & {
     transform: scale(0.8);
+
     @media screen and (min-width: 768px) {
       transform: translate(-50%, -50%) scale(0.8);
     }
@@ -63,10 +65,8 @@
 
 .modal__appeal {
   margin-bottom: 30px;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.03em;
+  @include font(700, 18px, 22px, 0em);
+  text-transform: uppercase;
   text-align: center;
   color: #000;
 }
@@ -138,6 +138,7 @@
   margin-top: 20px;
   background-color: transparent;
   border: none;
+
   &:hover,
   &:focus {
     color: $accent-color;

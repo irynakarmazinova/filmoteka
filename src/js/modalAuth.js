@@ -3,28 +3,28 @@ import { closeAuthModalMsg } from './pnotify';
 
 //functions for opening and closing registration and sing in modals
 function openSignInModal() {
-  modalSignIn.classList.remove('auth__backdrop-is-hidden');
+  modalSignIn.classList.remove('backdrop__is-hidden');
   window.addEventListener('click', handleBackdropClick);
   window.addEventListener('keydown', handleEscPress);
 }
 
 function closeSignInModal() {
   document.getElementById('searchQuery').value = '';
-  modalSignIn.classList.add('auth__backdrop-is-hidden');
+  modalSignIn.classList.add('backdrop__is-hidden');
   window.removeEventListener('click', handleBackdropClick);
   window.removeEventListener('keydown', handleEscPress);
 }
 
 function openRegistrationModal() {
-  modalRegistration.classList.remove('auth__backdrop-is-hidden');
-  modalSignIn.classList.add('auth__backdrop-is-hidden');
+  modalRegistration.classList.remove('backdrop__is-hidden');
+  modalSignIn.classList.add('backdrop__is-hidden');
   window.addEventListener('click', handleBackdropClick);
   window.addEventListener('keydown', handleEscPress);
 }
 
 function closeRegistrationModal() {
   document.getElementById('searchQuery').value = '';
-  modalRegistration.classList.add('auth__backdrop-is-hidden');
+  modalRegistration.classList.add('backdrop__is-hidden');
   window.removeEventListener('click', handleBackdropClick);
   window.removeEventListener('keydown', handleEscPress);
 }
@@ -34,7 +34,7 @@ function handleEscPress(e) {
   if (e.code !== 'Escape') {
     return;
   }
-  if (modalSignIn.classList.contains('auth__backdrop-is-hidden')) {
+  if (modalSignIn.classList.contains('backdrop__is-hidden')) {
     closeRegistrationModal();
   } else {
     closeSignInModal();
@@ -45,8 +45,8 @@ function handleEscPress(e) {
 //function for closing modal on backdrop click
 function handleBackdropClick(e) {
   if (
-    e.target.classList.contains('auth__backdrop') &&
-    !modalSignIn.classList.contains('auth__backdrop-is-hidden')
+    e.target.classList.contains('backdrop') &&
+    !modalSignIn.classList.contains('backdrop__is-hidden')
   ) {
     closeSignInModal();
     setTimeout(() => {
@@ -55,8 +55,8 @@ function handleBackdropClick(e) {
   }
 
   if (
-    e.target.classList.contains('auth__backdrop') &&
-    !modalRegistration.classList.contains('auth__backdrop-is-hidden')
+    e.target.classList.contains('backdrop') &&
+    !modalRegistration.classList.contains('backdrop__is-hidden')
   ) {
     closeRegistrationModal();
     setTimeout(() => {
