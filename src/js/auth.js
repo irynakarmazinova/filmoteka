@@ -69,6 +69,7 @@ async function handleSignIn(e) {
     await signInWithEmailAndPassword(auth, email, password);
     const userId = auth.currentUser.uid;
     getMoviesFromDB(userId, 'watchedMovies');
+    loadMoreBtn.hide();
     addBtnWatchedAccentColor();
     markupMyLibrary();
     successfulSignInMsg();
@@ -167,6 +168,7 @@ async function openMyLib(id, movieListType) {
   }
   await getMoviesFromDB(id, movieListType);
   document.getElementById('searchQuery').value = '';
+  loadMoreBtn.hide();
   markupMyLibrary();
   addBtnWatchedAccentColor();
 }
