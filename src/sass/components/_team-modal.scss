@@ -1,25 +1,25 @@
-.team-modal{
-    border-radius: 7px;
-    overflow: auto;
-    position: relative;
-    left: 50%;
-    top: 50%;    
-    transform: translate(-50%, -50%) scale(1);    
-    height: 90%;
-    background: #ffffff;
-    padding: 40px;
+.team-modal {
+  border-radius: 5px;
+  overflow: auto;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  height: 90%;
+  background: #ffffff;
+  padding: 40px;
 
-    @media screen and (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     max-width: 320px;
-    }
+  }
 
-    @media screen and (min-width: 768px) {
-    max-width: 768px;  
-    max-height: 930px;  
-    }
+  @media screen and (min-width: 768px) {
+    max-width: 768px;
+    max-height: 930px;
+  }
 
-    @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1024px) {
     max-width: 1024px;
     max-height: 880px;
-    }
+  }
 }

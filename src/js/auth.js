@@ -1,4 +1,5 @@
 import API from './fetchApi';
+
 import {
   getAuth,
   onAuthStateChanged,
@@ -6,7 +7,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+
 import { getMoviesFromDB } from './database';
+
 import {
   signInForm,
   registrationForm,
@@ -22,6 +25,7 @@ import {
   modalRegistrationClose,
   myLibNavButtons,
 } from './refs';
+
 import {
   successfulRegistrationMsg,
   authErrorMsg,
@@ -30,13 +34,16 @@ import {
   registrationErrorMsg,
   errorMsg,
 } from './pnotify';
+
 import { markupMyLibrary, markupHome, addBtnWatchedAccentColor } from './header';
+
 import {
   closeRegistrationModal,
   openSignInModal,
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
+
 import { loadMoreBtn, createMarkupFilms, clearMovieCard } from './fn';
 
 const api = new API();

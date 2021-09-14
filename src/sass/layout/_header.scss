@@ -250,7 +250,7 @@
 }
 
 .notice {
-  @include font(700, 20px, 16px, 0em);
+  @include font(500, 18px, 20px, 0em);
   text-align: center;
   margin: 0 auto;
   padding-top: 30px;
@@ -272,12 +272,11 @@
   padding-top: 35px;
 }
 
-
-.menu__link-theme-btn{  
+.menu__link-theme-btn {
   width: 20px;
   height: 20px;
-  background: url("/images/sun.svg");
+  background: url('/images/sun.svg');
   background-size: contain;
   padding: 0;
-  border: none;  
+  border: none;
 }
