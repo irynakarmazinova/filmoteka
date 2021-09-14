@@ -1,6 +1,6 @@
 import API from './fetchApi';
 import movieTmpl from '../templates/movie-card.hbs';
-import { notEnterSearchQuery, wrongRequest } from './pontify';
+import { notEnterSearchQuery, wrongRequest } from './pnotify';
 import {
   searchForm,
   gallery,
@@ -20,12 +20,12 @@ import {
   signOutContainer,
   errorText,
 } from './refs';
-import { emptyMovie } from './pontify';
+import { emptyMovie } from './pnotify';
 import { clearMovieCard, onHomeClick, loadMoreBtn, onSearch } from './fn';
 
 const api = new API();
 
-myLibraryBtn.addEventListener('click', onLibraryBtnClick);
+// myLibraryBtn.addEventListener('click', onLibraryBtnClick);
 homeBtn.addEventListener('click', onHomeClick);
 logo.addEventListener('click', onHomeClick);
 logoImg.addEventListener('click', onHomeClick);
@@ -46,14 +46,14 @@ queuedBtn.addEventListener('click', onSubmitQueue);
 //   fetchFilmsDefault();
 // }
 
-function onLibraryBtnClick(e) {
-  e.preventDefault();
-  markupMyLibrary();
+// function onLibraryBtnClick(e) {
+//   e.preventDefault();
+//   // markupMyLibrary();
 
-  loadMoreBtn.hide();
-  clearMovieCard();
-  errorText.textContent = '';
-}
+//   loadMoreBtn.hide();
+//   clearMovieCard();
+//   errorText.textContent = '';
+// }
 
 function onSubmitWatched(e) {
   e.preventDefault();
@@ -94,10 +94,4 @@ function addBtnQueueAccentColor() {
   watchedBtn.classList.remove('accent-color');
 }
 
-export {
-  markupMyLibrary,
-  markupHome,
-  onLibraryBtnClick,
-  addBtnQueueAccentColor,
-  addBtnWatchedAccentColor,
-};
+export { markupMyLibrary, markupHome, addBtnQueueAccentColor, addBtnWatchedAccentColor };

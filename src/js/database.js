@@ -11,7 +11,7 @@ import {
   remove,
 } from 'firebase/database';
 import { gallery } from './refs';
-import { emptyLibraryMsg, errorMsg } from './pontify';
+import { emptyLibraryMsg, errorMsg } from './pnotify';
 import movieTmpl from '../templates/movie-card-my-library.hbs';
 
 //database settings

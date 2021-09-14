@@ -1,7 +1,7 @@
 import { gallery } from './refs';
 import movieTmpl from '../templates/movie-card.hbs';
 import LoadMoreBtn from './loadMoreBtnClass';
-import { notEnterSearchQuery, wrongRequest } from './pontify';
+import { notEnterSearchQuery, wrongRequest } from './pnotify';
 import { markupHome } from './header';
 
 import { API_KEY, BASE_URL } from './constants';

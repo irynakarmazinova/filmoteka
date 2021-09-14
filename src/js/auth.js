@@ -29,15 +29,15 @@ import {
   successfulSignInMsg,
   registrationErrorMsg,
   errorMsg,
-} from './pontify';
-import { markupMyLibrary, markupHome } from './header';
+} from './pnotify';
+import { markupMyLibrary, markupHome, addBtnWatchedAccentColor } from './header';
 import {
   closeRegistrationModal,
   openSignInModal,
   openRegistrationModal,
   closeSignInModal,
 } from './modalAuth';
-import { loadMoreBtn } from './fn';
+import { loadMoreBtn, createMarkupFilms, clearMovieCard } from './fn';
 
 const api = new API();
 const auth = getAuth();
@@ -67,6 +67,9 @@ async function handleSignIn(e) {
   const password = e.currentTarget.elements.password.value;
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    const userId = auth.currentUser.uid;
+    getMoviesFromDB(userId, 'watchedMovies');
+    addBtnWatchedAccentColor();
     markupMyLibrary();
     successfulSignInMsg();
     closeSignInModal();
@@ -78,12 +81,9 @@ async function handleSignIn(e) {
 //user sign out function
 async function handleSignOut() {
   try {
-    await signOut(auth, user => {
-      const userId = user.uid;
-    });
+    await signOut(auth);
+    handleSignOutEvents();
     signOutMsg();
-    disableBtns();
-    markupHome();
   } catch {
     errorMsg();
   }
@@ -97,6 +97,10 @@ async function handleAuthStateChange() {
         const userId = user.uid;
         showSignOutIcon();
         manageLogInEvents();
+
+        myLibraryBtn.addEventListener('click', e => {
+          openMyLib(userId, 'watchedMovies');
+        });
 
         myLibNavButtons.addEventListener('click', e => {
           loadMoreBtn.hide();
@@ -117,7 +121,6 @@ async function handleAuthStateChange() {
 
 //functions for managing event listeners as user  is logged in and logged out
 function manageLogInEvents() {
-  myLibraryBtn.addEventListener('click', markupMyLibrary);
   homeBtn.addEventListener('click', disableBtns);
   signInForm.removeEventListener('submit', handleSignIn);
   myLibraryBtn.removeEventListener('click', openSignInModal);
@@ -130,7 +133,6 @@ function manageLogInEvents() {
 }
 
 function manageLogOutEvents() {
-  myLibraryBtn.removeEventListener('click', markupMyLibrary);
   homeBtn.removeEventListener('click', disableBtns);
   registrationForm.addEventListener('submit', handleRegistration);
   signInForm.addEventListener('submit', handleSignIn);
@@ -157,4 +159,21 @@ function hideSignOutIcon() {
 
 function showSignOutIcon() {
   signOutIcon.classList.remove('visually-hidden');
+}
+
+async function openMyLib(id, movieListType) {
+  if (signOutIcon.classList.contains('visually-hidden')) {
+    return;
+  }
+  await getMoviesFromDB(id, movieListType);
+  document.getElementById('searchQuery').value = '';
+  markupMyLibrary();
+  addBtnWatchedAccentColor();
+}
+
+function handleSignOutEvents() {
+  clearMovieCard();
+  createMarkupFilms();
+  disableBtns();
+  markupHome();
 }

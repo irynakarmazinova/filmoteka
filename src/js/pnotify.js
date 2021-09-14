@@ -1,4 +1,4 @@
-import { success, error, info, notice } from '@pnotify/core';
+import { error, info, notice } from '@pnotify/core';
 
 export {
   successfulRegistrationMsg,
@@ -6,11 +6,12 @@ export {
   signOutMsg,
   successfulSignInMsg,
   errorMsg,
-  emptyLibraryMsg, 
-  notEnterSearchQuery, 
+  emptyLibraryMsg,
+  notEnterSearchQuery,
   registrationErrorMsg,
   emptyMovie,
   wrongRequest,
+  closeAuthModalMsg,
 };
 
 function successfulRegistrationMsg() {
@@ -62,7 +63,6 @@ function errorMsg() {
   });
 }
 
-
 function notEnterSearchQuery() {
   notice({
     text: 'Please enter your request parameters!',
@@ -77,10 +77,16 @@ function emptyMovie() {
   });
 }
 
-
 function wrongRequest() {
   error({
     text: 'Search result not successful. Enter the correct movie name!',
+    delay: 2000,
+  });
+}
+
+function closeAuthModalMsg() {
+  notice({
+    text: 'Please SIGN IN or REGISTER to use the Movie Library!',
     delay: 2000,
   });
 }
