@@ -16,7 +16,7 @@ const refs = {
   registrationForm: document.querySelector('.registration-form-js'),
   signInForm: document.querySelector('.signin-form-js'),
   signOutBtn: document.querySelector('.signout-btn-js'),
-  backdrop: document.querySelector('.team__backdrop'),
+  // backdrop: document.querySelector('.team__backdrop'),
   modalCloseBtn: document.querySelector('.team__modal-close-btn'),
   footerLink: document.getElementById('footer__link'),
   cardSectionLoader: document.getElementById('cardSectionLoader'),
@@ -31,6 +31,8 @@ const refs = {
   myLibNavButtons: document.querySelector('.btn-list'),
   darkThemeBtn: document.querySelector('.menu__link-theme-btn'),
   darkThemeIcon: document.querySelector('.dark-theme-icon'),
+
+  backdrop: document.querySelector('.backdrop'),
 };
 
 export const {
