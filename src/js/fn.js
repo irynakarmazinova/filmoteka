@@ -93,7 +93,7 @@ function createMarkupFilms() {
 
         if (film.length === 0) {
           gallery.innerHTML = `<div class="notice">
-          <span>Search result not successful. Enter the correct movie name</span>
+          <span>Search result not successful. Enter the correct movie name!</span>
           <img class="img-smile" src="https://i.pinimg.com/474x/f4/b7/f7/f4b7f707d9750650763e42ad4a5156b9.jpg" alt="smile">
           </div>`;
         }
@@ -116,7 +116,7 @@ function onSearch(e) {
   if (varInputValue === '') {
     notEnterSearchQuery();
     loadMoreBtn.hide();
-    gallery.innerHTML = `<div class="notice"><span>You haven't entered anything. Please enter your search request</span>
+    gallery.innerHTML = `<div class="notice"><span>You haven't entered anything. Please enter your search request!</span>
     <img class="img-smile" src="https://i.pinimg.com/736x/27/2f/13/272f1363f910dbcd1bc274b38a650407--smiley-faces-emoji.jpg" alt="smile"
     </div>`;
     return;

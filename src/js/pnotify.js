@@ -70,7 +70,7 @@ function errorMsg() {
 
 function notEnterSearchQuery() {
   notice({
-    text: 'Please enter your request parameters!',
+    text: 'Please enter your search request!',
     delay: 2000,
   });
 }

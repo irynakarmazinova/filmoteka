@@ -1,13 +1,15 @@
 .team-modal {
-  border-radius: 5px;
-  overflow: auto;
   position: relative;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(1);
+
   height: 90%;
-  background: #ffffff;
-  padding: 40px;
+  padding: 30px;
+  background: $background-color;
+
+  border-radius: 5px;
+  overflow: auto;
+  transform: translate(-50%, -50%);
 
   @media screen and (max-width: 767px) {
     max-width: 320px;
