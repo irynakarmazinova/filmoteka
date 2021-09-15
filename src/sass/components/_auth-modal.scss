@@ -1,34 +1,29 @@
 .auth-modal {
   width: 100vw;
   height: 100vh;
-  padding: 140px 40px;
-  border-radius: 5px;
-  overflow: hidden;
-  transform: scale(1);
-  background-color: rgb(253, 249, 241);
-  transition: transform 250ms linear;
+  padding: 100px 40px;
 
-  @media screen and (min-width: 768px) {
+  overflow: hidden;
+  background-color: $background-color;
+
+  @media screen and (min-width: 480px) {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%);
+
     max-width: 450px;
-    max-height: 450px;
+    max-height: 400px;
     padding: 40px;
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 500px;
   }
 
   @media screen and (min-width: 1024px) {
     max-width: 528px;
-    height: 400px;
-  }
-
-  .auth__backdrop-is-hidden > & {
-    transform: scale(0.8);
-
-    @media screen and (min-width: 768px) {
-      transform: translate(-50%, -50%) scale(0.8);
-    }
   }
 }
 
@@ -68,7 +63,6 @@
   @include font(700, 18px, 22px, 0em);
   text-transform: uppercase;
   text-align: center;
-  color: #000;
 }
 
 .auth-form {
@@ -84,20 +78,16 @@
     position: relative;
     display: block;
   }
-
-  &__button {
-    align-self: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  }
 }
 
 .auth-form__input {
   padding: 5px 10px 5px 42px;
   width: 100%;
   height: 40px;
-  border: 1px solid rgba(33, 33, 33, 0.2);
+
+  border: 1px solid $modal-input-color;
   border-radius: 4px;
-  color: rgb(29, 27, 27);
+  color: $footer-text-color;
   transition: border-color 250ms linear;
 
   &:focus {
@@ -136,6 +126,9 @@
   display: block;
   margin: 0 auto;
   margin-top: 20px;
+
+  @include font(500, 14px, 20px, 0em);
+  text-transform: uppercase;
   background-color: transparent;
   border: none;
 

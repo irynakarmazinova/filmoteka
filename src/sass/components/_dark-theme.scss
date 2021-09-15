@@ -65,6 +65,10 @@ body {
   .menu__link-theme-btn {
     background: url('/images/moon.svg');
     background-size: contain;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
   }
 }
 
@@ -74,15 +78,16 @@ body {
 
 .dark-theme-wrapper {
   position: absolute;
-  left: 92.4%;
-  bottom: -45%;
+  left: 35%;
+  bottom: -9%;
 
-  @media screen and(max-width: 1023px) {
-    left: 88.4%;
+  @media screen and(min-width: 768px) {
+    left: 70%;
+    bottom: 0%;
   }
 
-  @media screen and(max-width: 767px) {
-    left: 76.4%;
-    bottom: -35%;
+  @media screen and(min-width: 1024px) {
+    left: 79.4%;
+    bottom: -2%;
   }
 }

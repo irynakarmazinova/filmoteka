@@ -45,7 +45,6 @@
   margin-bottom: 32px;
 
   @media screen and (min-width: 768px) {
-    padding-left: -1px;
     padding-top: 40px;
   }
 
@@ -95,7 +94,7 @@
 }
 
 .menu__item:not(:last-child) {
-  margin-right: 39px;
+  margin-right: 30px;
 }
 
 .btn-style {
@@ -118,8 +117,14 @@
 }
 
 .wrapper__exit {
+  position: absolute;
+  top: 24px;
+  right: 3px;
   @include flex-center;
-  transform: translate(33px, -61px);
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    right: 8px;
+  }
 }
 
 .exit-icon {
@@ -250,11 +255,13 @@
 }
 
 .notice {
-  @include font(500, 18px, 20px, 0em);
+  @include font(500, 18px, 24px, 0em);
+  // @include font(500, 14px, 18px, 0em);
+  // text-transform: uppercase;
   text-align: center;
   margin: 0 auto;
   padding-top: 30px;
-  color: #ff001b;
+  color: $error-text-color;
 }
 
 .error__text {
@@ -263,7 +270,7 @@
   font-style: normal;
   @include font(400, 14px, 16px, 0em);
   text-align: center;
-  color: #ff001b;
+  color: $error-text-color;
 }
 
 .img-smile {
