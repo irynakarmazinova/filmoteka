@@ -44,3 +44,17 @@
   }
 }
 
+.telegram {
+  position: fixed;
+  bottom: 60px;
+  right: 8px;
+
+  @media screen and (min-width: 768px) {
+    right: 25px;
+  }
+
+  &__icon {
+    width: 34px;
+    height: 34px;
+  }
+}
